@@ -1,0 +1,3047 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
+<title>IT Eğitim Rehberi | Okan Keçeci</title>
+<meta name="description" content="IT uzmanı olmak için kapsamlı Türkçe eğitim rehberi"/>
+<meta name="theme-color" content="#00d4ff"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="IT Rehberi"/>
+<link rel="manifest" href="manifest.json"/>
+<link rel="apple-touch-icon" href="icon-192.png"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --bg:#060d1a;--bg2:#0a1628;--bg3:#0f1f38;
+  --card:#0d1b33;--border:rgba(0,212,255,.15);
+  --neon:#00d4ff;--green:#00ff88;--yellow:#ffd700;--red:#ff6b6b;--purple:#a78bfa;
+  --text:#c8deff;--muted:#6b8cae;--white:#fff;
+  --sidebar:260px;
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);display:flex;min-height:100vh;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--neon);border-radius:4px;}
+
+/* SIDEBAR */
+#sidebar{
+  width:var(--sidebar);min-width:var(--sidebar);height:100vh;
+  position:sticky;top:0;overflow-y:auto;
+  background:var(--bg2);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+}
+.sidebar-logo{
+  padding:1.4rem 1.2rem;border-bottom:1px solid var(--border);
+  font-family:'Courier New',monospace;font-size:1rem;font-weight:800;
+  color:var(--neon);text-shadow:0 0 12px var(--neon);
+  letter-spacing:.05em;
+}
+.sidebar-logo span{display:block;font-size:.7rem;color:var(--muted);margin-top:.2rem;font-weight:400;}
+nav{flex:1;padding:.8rem 0;}
+.nav-item{
+  display:flex;align-items:center;gap:.7rem;
+  padding:.65rem 1.2rem;cursor:pointer;
+  color:var(--muted);font-size:.88rem;font-weight:500;
+  border-left:3px solid transparent;
+  transition:all .18s;user-select:none;
+}
+.nav-item:hover{color:var(--text);background:rgba(0,212,255,.05);border-left-color:rgba(0,212,255,.3);}
+.nav-item.active{color:var(--neon);background:rgba(0,212,255,.08);border-left-color:var(--neon);font-weight:700;}
+.nav-item .ni{font-size:1.1rem;width:22px;text-align:center;}
+.progress-bar-mini{height:2px;background:rgba(0,212,255,.1);margin:.15rem 1.2rem .5rem;}
+.progress-bar-mini-fill{height:100%;background:var(--neon);border-radius:99px;transition:width .4s;}
+
+/* MAIN */
+#main{flex:1;overflow-y:auto;min-height:100vh;}
+
+/* TOP BAR */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(6,13,26,.9);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;
+}
+.topbar-title{font-size:1rem;font-weight:700;color:var(--white);}
+.topbar-sub{font-size:.78rem;color:var(--muted);font-family:'Courier New',monospace;}
+.search-box{
+  display:flex;align-items:center;gap:.5rem;
+  background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:.4rem .9rem;
+}
+.search-box input{
+  background:none;border:none;outline:none;color:var(--text);
+  font-size:.85rem;width:180px;
+}
+.search-box input::placeholder{color:var(--muted);}
+
+/* CONTENT AREA */
+#content{padding:2.5rem 2rem;}
+
+/* SECTION PAGE */
+.page{display:none;}
+.page.active{display:block;}
+
+/* HERO CARD */
+.topic-hero{
+  background:linear-gradient(135deg,var(--card),var(--bg3));
+  border:1px solid var(--border);border-radius:16px;
+  padding:2rem 2.2rem;margin-bottom:2rem;
+  display:flex;align-items:center;gap:1.5rem;
+  position:relative;overflow:hidden;
+}
+.topic-hero::before{
+  content:'';position:absolute;top:-40px;right:-40px;
+  width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,212,255,.12),transparent);
+}
+.topic-icon{font-size:3rem;flex-shrink:0;}
+.topic-hero h1{font-size:1.7rem;font-weight:800;color:var(--white);margin-bottom:.4rem;}
+.topic-hero p{color:var(--muted);font-size:.95rem;}
+.level-badge{
+  display:inline-block;padding:.2rem .7rem;border-radius:4px;
+  font-size:.72rem;font-weight:700;font-family:'Courier New',monospace;
+  background:rgba(0,255,136,.1);color:var(--green);border:1px solid rgba(0,255,136,.2);
+  margin-top:.6rem;
+}
+
+/* MODULE */
+.module{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;margin-bottom:1.2rem;overflow:hidden;
+}
+.module-header{
+  display:flex;align-items:center;gap:.8rem;
+  padding:1rem 1.4rem;cursor:pointer;
+  transition:background .18s;user-select:none;
+}
+.module-header:hover{background:rgba(0,212,255,.05);}
+.module-num{
+  width:28px;height:28px;border-radius:6px;flex-shrink:0;
+  background:rgba(0,212,255,.12);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.78rem;font-weight:800;color:var(--neon);font-family:'Courier New',monospace;
+}
+.module-title{font-weight:700;color:var(--white);font-size:.97rem;flex:1;}
+.module-arrow{color:var(--muted);transition:transform .25s;font-size:.85rem;}
+.module.open .module-arrow{transform:rotate(90deg);}
+.module-body{display:none;padding:0 1.4rem 1.4rem;border-top:1px solid var(--border);}
+.module.open .module-body{display:block;}
+
+/* CONTENT ELEMENTS */
+h2.sec{font-size:1.05rem;font-weight:700;color:var(--neon);margin:1.2rem 0 .6rem;
+  font-family:'Courier New',monospace;display:flex;align-items:center;gap:.5rem;}
+h2.sec::before{content:'//';color:var(--muted);font-size:.85rem;}
+p{color:var(--muted);font-size:.92rem;margin-bottom:.8rem;line-height:1.75;}
+p strong{color:var(--text);}
+ul.list,ol.list{padding-left:1.4rem;margin-bottom:.9rem;}
+ul.list li,ol.list li{color:var(--muted);font-size:.9rem;margin-bottom:.4rem;line-height:1.65;}
+ul.list li strong,ol.list li strong{color:var(--text);}
+
+.tip{
+  background:rgba(0,255,136,.07);border:1px solid rgba(0,255,136,.2);
+  border-radius:8px;padding:.85rem 1rem;margin:.9rem 0;
+  color:var(--green);font-size:.88rem;
+}
+.tip::before{content:'💡 İpucu: ';font-weight:700;}
+.warn{
+  background:rgba(255,215,0,.07);border:1px solid rgba(255,215,0,.2);
+  border-radius:8px;padding:.85rem 1rem;margin:.9rem 0;
+  color:var(--yellow);font-size:.88rem;
+}
+.warn::before{content:'⚠️ Dikkat: ';font-weight:700;}
+.danger{
+  background:rgba(255,107,107,.07);border:1px solid rgba(255,107,107,.2);
+  border-radius:8px;padding:.85rem 1rem;margin:.9rem 0;
+  color:var(--red);font-size:.88rem;
+}
+.danger::before{content:'🚫 Önemli: ';font-weight:700;}
+
+code{
+  font-family:'Courier New',monospace;background:rgba(0,212,255,.08);
+  color:var(--neon);padding:.1rem .4rem;border-radius:4px;font-size:.85rem;
+}
+pre{
+  background:var(--bg);border:1px solid var(--border);border-radius:10px;
+  padding:1rem 1.2rem;overflow-x:auto;margin:.9rem 0;
+  font-family:'Courier New',monospace;font-size:.83rem;color:var(--green);line-height:1.7;
+}
+pre .cmd{color:var(--neon);}
+pre .comment{color:var(--muted);}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:.9rem 0;}
+.mini-card{
+  background:var(--bg3);border:1px solid var(--border);border-radius:10px;
+  padding:.9rem 1rem;
+}
+.mini-card h4{color:var(--white);font-size:.88rem;font-weight:700;margin-bottom:.4rem;}
+.mini-card p{font-size:.82rem;margin:0;}
+
+table{width:100%;border-collapse:collapse;margin:.9rem 0;font-size:.85rem;}
+th{background:rgba(0,212,255,.1);color:var(--neon);padding:.6rem .9rem;text-align:left;
+   font-family:'Courier New',monospace;font-weight:700;border-bottom:1px solid var(--border);}
+td{padding:.55rem .9rem;color:var(--muted);border-bottom:1px solid rgba(255,255,255,.04);}
+tr:hover td{background:rgba(0,212,255,.03);}
+
+/* HOME */
+.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem;}
+.home-card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:1.4rem;cursor:pointer;transition:transform .18s,border-color .2s,box-shadow .2s;
+}
+.home-card:hover{transform:translateY(-4px);border-color:rgba(0,212,255,.4);box-shadow:0 8px 28px rgba(0,212,255,.1);}
+.home-card .hc-icon{font-size:2rem;margin-bottom:.7rem;}
+.home-card h3{color:var(--white);font-size:.97rem;font-weight:700;margin-bottom:.4rem;}
+.home-card p{color:var(--muted);font-size:.8rem;margin:0;}
+.home-card .hc-count{
+  display:inline-block;margin-top:.7rem;padding:.2rem .6rem;border-radius:4px;
+  background:rgba(0,212,255,.08);color:var(--neon);font-size:.72rem;
+  font-family:'Courier New',monospace;border:1px solid var(--border);
+}
+
+/* ── LOG PANELİ ── */
+.log-toolbar{
+  display:flex; gap:.8rem; flex-wrap:wrap; align-items:center; margin-bottom:1.5rem;
+}
+.log-toolbar button{
+  padding:.5rem 1.1rem; border-radius:8px; font-size:.82rem; font-weight:700;
+  cursor:pointer; border:1px solid var(--border); font-family:'Courier New',monospace;
+  transition:all .18s;
+}
+.btn-export{ background:rgba(0,255,136,.1); color:var(--green); border-color:rgba(0,255,136,.25);}
+.btn-export:hover{ background:rgba(0,255,136,.2); box-shadow:0 0 12px rgba(0,255,136,.2);}
+.btn-clear{ background:rgba(255,107,107,.1); color:#ff6b6b; border-color:rgba(255,107,107,.25);}
+.btn-clear:hover{ background:rgba(255,107,107,.2);}
+.log-filter{
+  padding:.48rem .9rem; background:var(--card); border:1px solid var(--border);
+  border-radius:8px; color:var(--text); font-size:.82rem; outline:none;
+  font-family:'Courier New',monospace; cursor:pointer;
+}
+.log-stats{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:.8rem; margin-bottom:1.5rem;
+}
+.log-stat{
+  background:var(--card); border:1px solid var(--border); border-radius:12px;
+  padding:1rem; text-align:center;
+}
+.log-stat .ls-num{ font-size:1.7rem; font-weight:900; font-family:'Courier New',monospace;}
+.log-stat .ls-label{ font-size:.75rem; color:var(--muted); margin-top:.2rem;}
+.log-table-wrap{ overflow-x:auto; border-radius:12px; border:1px solid var(--border);}
+.log-table{ width:100%; border-collapse:collapse; font-size:.82rem;}
+.log-table th{
+  background:rgba(0,212,255,.08); color:var(--neon); padding:.65rem .9rem;
+  text-align:left; font-family:'Courier New',monospace; font-size:.75rem;
+  letter-spacing:.05em; white-space:nowrap; border-bottom:1px solid var(--border);
+}
+.log-table td{ padding:.6rem .9rem; border-bottom:1px solid rgba(255,255,255,.04); vertical-align:top;}
+.log-table tr:last-child td{ border-bottom:none;}
+.log-table tr:hover td{ background:rgba(0,212,255,.03);}
+.log-empty{ text-align:center; color:var(--muted); padding:3rem; font-family:'Courier New',monospace;}
+.badge-ok{ color:var(--green);}
+.badge-fail{ color:#ff6b6b;}
+.badge-lock{ color:var(--red,#ff6b6b);}
+.badge-out{ color:var(--neon);}
+
+/* ── LOGIN ── */
+#login-screen{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+}
+#login-screen.hidden{display:none;}
+.login-box{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:20px;padding:2.8rem 2.4rem;
+  width:100%;max-width:400px;margin:1rem;
+  box-shadow:0 0 60px rgba(0,212,255,.12);
+  position:relative;overflow:hidden;
+  animation:loginIn .5s ease;
+}
+@keyframes loginIn{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:none;}}
+.login-box::before{
+  content:'';position:absolute;top:-70px;right:-70px;
+  width:220px;height:220px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,212,255,.08),transparent);pointer-events:none;
+}
+.login-logo{text-align:center;margin-bottom:2rem;}
+.login-logo .l-icon{
+  width:74px;height:74px;border-radius:18px;
+  background:linear-gradient(135deg,var(--bg3),var(--bg2));
+  border:2px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Courier New',monospace;font-size:1.7rem;font-weight:900;
+  color:var(--neon);text-shadow:0 0 18px var(--neon);
+  margin:0 auto .9rem;box-shadow:0 0 28px rgba(0,212,255,.22);
+}
+.login-logo h2{color:var(--white);font-size:1.15rem;font-weight:800;margin-bottom:.2rem;}
+.login-logo p{color:var(--muted);font-size:.78rem;font-family:'Courier New',monospace;}
+.login-field{margin-bottom:1.1rem;}
+.login-field label{
+  display:block;font-size:.75rem;font-weight:700;
+  color:var(--muted);margin-bottom:.45rem;
+  font-family:'Courier New',monospace;letter-spacing:.08em;text-transform:uppercase;
+}
+.login-field input{
+  width:100%;padding:.78rem 1rem;
+  background:var(--bg3);border:1.5px solid var(--border);
+  border-radius:10px;color:var(--text);font-size:.95rem;
+  outline:none;transition:border-color .2s,box-shadow .2s;
+}
+.login-field input:focus{border-color:var(--neon);box-shadow:0 0 0 3px rgba(0,212,255,.12);}
+.pass-wrap{position:relative;}
+.pass-wrap input{padding-right:2.8rem;}
+.pass-eye{
+  position:absolute;right:.8rem;top:50%;transform:translateY(-50%);
+  cursor:pointer;color:var(--muted);font-size:1rem;user-select:none;
+  transition:color .2s;
+}
+.pass-eye:hover{color:var(--neon);}
+.login-btn{
+  width:100%;padding:.88rem;
+  background:linear-gradient(90deg,#3a56e8,var(--neon));
+  border:none;border-radius:10px;
+  color:#fff;font-size:.98rem;font-weight:800;
+  cursor:pointer;margin-top:.3rem;
+  transition:opacity .18s,transform .15s,box-shadow .18s;
+  font-family:'Courier New',monospace;letter-spacing:.05em;
+  box-shadow:0 4px 22px rgba(0,212,255,.28);
+}
+.login-btn:hover:not(:disabled){opacity:.9;transform:translateY(-1px);box-shadow:0 6px 30px rgba(0,212,255,.42);}
+.login-btn:disabled{opacity:.45;cursor:not-allowed;}
+.login-error{
+  background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.3);
+  border-radius:8px;padding:.65rem .9rem;
+  color:#ff6b6b;font-size:.83rem;
+  margin-top:.9rem;display:none;text-align:center;
+}
+.login-error.show{display:block;animation:shake .35s ease;}
+@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}50%{transform:translateX(6px);}}
+.login-footer{text-align:center;margin-top:1.4rem;color:var(--muted);font-size:.72rem;font-family:'Courier New',monospace;}
+.attempt-warn{color:var(--yellow);font-size:.8rem;text-align:center;margin-top:.6rem;display:none;}
+.attempt-warn.show{display:block;}
+#logout-btn{
+  position:fixed;bottom:1.2rem;right:1.2rem;z-index:400;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:.55rem 1rem;
+  color:var(--muted);font-size:.78rem;cursor:pointer;
+  font-family:'Courier New',monospace;transition:all .2s;
+  display:none;align-items:center;gap:.4rem;
+}
+#logout-btn:hover{border-color:#ff6b6b;color:#ff6b6b;}
+
+/* ── HAMBURGER ── */
+#hamburger{
+  display:none; position:fixed; top:12px; left:12px; z-index:300;
+  width:42px; height:42px; border-radius:10px;
+  background:var(--card); border:1px solid var(--border);
+  cursor:pointer; flex-direction:column; align-items:center; justify-content:center; gap:5px;
+  box-shadow:0 4px 16px rgba(0,0,0,.4);
+}
+#hamburger span{
+  display:block; width:20px; height:2px; background:var(--neon);
+  border-radius:2px; transition:all .28s;
+}
+#hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+#hamburger.open span:nth-child(2){opacity:0;}
+#hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+#overlay{
+  display:none; position:fixed; inset:0; z-index:149;
+  background:rgba(0,0,0,.6); backdrop-filter:blur(2px);
+}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  #hamburger{display:flex;}
+  #sidebar{
+    position:fixed; left:0; top:0; bottom:0; z-index:200;
+    transform:translateX(-100%); transition:transform .28s ease;
+    box-shadow:4px 0 24px rgba(0,0,0,.5);
+  }
+  #sidebar.open{transform:translateX(0);}
+  #overlay.open{display:block;}
+  #content{padding:1rem .9rem; padding-top:.5rem;}
+  .topbar{padding:.8rem 1rem .8rem 3.8rem;}
+  .search-box{display:none;}
+  .grid2{grid-template-columns:1fr;}
+  .about-grid{grid-template-columns:1fr; gap:1.5rem;}
+  .topic-hero{flex-direction:column; gap:1rem; padding:1.4rem;}
+  .topic-hero h1{font-size:1.3rem;}
+  .home-grid{grid-template-columns:1fr 1fr; gap:.8rem;}
+  .home-card{padding:1rem .8rem;}
+  .home-card .hc-icon{font-size:1.5rem;}
+  .home-card h3{font-size:.85rem;}
+  .home-card p{display:none;}
+  .stats-grid{grid-template-columns:1fr 1fr;}
+  .skills-grid{grid-template-columns:1fr 1fr;}
+  .ach-grid{grid-template-columns:1fr;}
+  table{font-size:.78rem;}
+  pre{font-size:.75rem;}
+  .module-header{padding:.85rem 1rem;}
+  .module-body{padding:0 1rem 1rem;}
+}
+@media(max-width:400px){
+  .home-grid{grid-template-columns:1fr;}
+  .stats-grid{grid-template-columns:1fr 1fr;}
+}
+
+/* ── LOG ŞİFRE MODALI ── */
+#log-pass-modal{
+  display:none;position:fixed;inset:0;z-index:8000;
+  background:rgba(6,13,26,.94);backdrop-filter:blur(8px);
+  align-items:center;justify-content:center;
+}
+#log-pass-modal.show{display:flex;}
+.log-pass-box{
+  background:var(--card);border:1px solid rgba(255,107,107,.35);
+  border-radius:20px;padding:2.4rem 2rem;
+  width:100%;max-width:380px;margin:1rem;
+  box-shadow:0 0 60px rgba(255,107,107,.14);
+  animation:loginIn .35s ease;
+}
+.log-pass-box h3{
+  color:#ff6b6b;font-size:1.1rem;font-weight:800;
+  text-align:center;margin-bottom:.4rem;
+}
+.log-pass-box .lp-sub{
+  color:var(--muted);font-size:.8rem;text-align:center;
+  font-family:'Courier New',monospace;margin-bottom:1.6rem;
+  line-height:1.5;
+}
+.log-pass-err{
+  background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.3);
+  border-radius:8px;padding:.55rem .8rem;
+  color:#ff6b6b;font-size:.82rem;text-align:center;
+  display:none;margin-bottom:.8rem;
+}
+.log-pass-err.show{display:block;animation:shake .35s ease;}
+</style>
+</head>
+<body>
+
+<!-- LOGIN EKRANI -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="l-icon">IT</div>
+      <h2>IT Eğitim Rehberi</h2>
+      <p>// Yetkili Giriş Gerekli</p>
+    </div>
+
+    <div class="login-field">
+      <label>Kullanıcı Adı</label>
+      <input type="text" id="l-user" placeholder="kullanıcı adı" autocomplete="username" onkeydown="if(event.key==='Enter')doLogin()"/>
+    </div>
+    <div class="login-field">
+      <label>Şifre</label>
+      <div class="pass-wrap">
+        <input type="password" id="l-pass" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"/>
+        <span class="pass-eye" id="eye-toggle" onclick="toggleEye()">👁</span>
+      </div>
+    </div>
+
+    <button class="login-btn" id="login-btn" onclick="doLogin()">🔐 Giriş Yap</button>
+    <div class="login-error" id="login-error">Kullanıcı adı veya şifre hatalı.</div>
+    <div class="attempt-warn" id="attempt-warn"></div>
+    <div class="login-footer">Okan Keçeci IT · 2026</div>
+  </div>
+</div>
+
+<!-- Logout -->
+<button id="logout-btn" onclick="doLogout()">🔓 Çıkış</button>
+
+<!-- Hamburger -->
+<div id="hamburger" onclick="toggleSidebar()">
+  <span></span><span></span><span></span>
+</div>
+<div id="overlay" onclick="toggleSidebar()"></div>
+
+<!-- SIDEBAR -->
+<div id="sidebar">
+  <div class="sidebar-logo">IT Eğitim<span>Rehberi — Okan Keçeci</span></div>
+  <nav>
+    <div class="nav-item active" onclick="showPage('home')"><span class="ni">🏠</span> Ana Sayfa</div>
+    <div class="nav-item" onclick="showPage('windows')"><span class="ni">🖥️</span> Windows Server</div>
+    <div class="nav-item" onclick="showPage('network')"><span class="ni">🌐</span> Ağ Yönetimi</div>
+    <div class="nav-item" onclick="showPage('itsm')"><span class="ni">🎫</span> ITSM</div>
+    <div class="nav-item" onclick="showPage('hardware')"><span class="ni">🔧</span> Donanım Desteği</div>
+    <div class="nav-item" onclick="showPage('m365')"><span class="ni">☁️</span> Microsoft 365</div>
+    <div class="nav-item" onclick="showPage('security')"><span class="ni">🔒</span> Siber Güvenlik</div>
+    <div class="nav-item" onclick="showPage('reporting')"><span class="ni">📊</span> Raporlama</div>
+    <div class="nav-item" onclick="showPage('users')"><span class="ni">👥</span> Kullanıcı İşlemleri</div>
+    <div class="nav-item" onclick="showPage('azure')"><span class="ni">🌩️</span> Azure / Bulut</div>
+    <div class="nav-item" onclick="showPage('powershell')"><span class="ni">🤖</span> PowerShell Otomasyon</div>
+    <div class="nav-item" onclick="showPage('virtualization')"><span class="ni">🖥️</span> Sanallaştırma</div>
+    <div class="nav-item" onclick="showPage('mdm')"><span class="ni">📱</span> MDM / Intune</div>
+    <div class="nav-item" onclick="showPage('database')"><span class="ni">🗄️</span> Veritabanı Temelleri</div>
+    <div class="nav-item" onclick="showPage('linux')"><span class="ni">🐧</span> Linux Temelleri</div>
+    <div class="nav-item" onclick="showPage('emailsec')"><span class="ni">📧</span> E-posta Güvenliği</div>
+    <div class="nav-item" onclick="showPage('projectmgmt')"><span class="ni">📋</span> IT Proje Yönetimi</div>
+    <div class="nav-item" onclick="showPage('budget')"><span class="ni">💼</span> Bütçe & Varlık Yönetimi</div>
+    <div class="nav-item" onclick="showPage('bcpdr')"><span class="ni">🔄</span> BCP / DR</div>
+    <div class="nav-item" onclick="showPage('compliance')"><span class="ni">📜</span> KVKK / ISO 27001</div>
+    <div class="nav-item" onclick="showPage('solar')"><span class="ni">☀️</span> Güneş Enerjisi & IT</div>
+    <div style="border-top:1px solid var(--border);margin:.6rem 1rem;"></div>
+    <div class="nav-item" onclick="showPage('logs')" style="color:#ff6b6b;"><span class="ni">📋</span> Giriş Logları</div>
+  </nav>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+  <div class="topbar">
+    <div>
+      <div class="topbar-title" id="topbar-title">Ana Sayfa</div>
+      <div class="topbar-sub" id="topbar-sub">IT Uzmanı Eğitim Rehberi</div>
+    </div>
+    <div class="search-box">
+      <span>🔍</span>
+      <input type="text" placeholder="Konu ara..." id="searchInput" oninput="searchContent(this.value)"/>
+    </div>
+  </div>
+
+  <div id="content">
+
+    <!-- HOME -->
+    <div class="page active" id="page-home">
+      <div class="topic-hero">
+        <div class="topic-icon">🚀</div>
+        <div>
+          <h1>IT Uzmanı Eğitim Rehberi</h1>
+          <p>Windows Server'dan Siber Güvenlik'e, ITSM'den Microsoft 365'e — sıfırdan uzmanlığa giden yol.</p>
+          <span class="level-badge">8 Kategori · Sıfırdan Uzmanlığa</span>
+        </div>
+      </div>
+      <div class="home-grid">
+        <div class="home-card" onclick="showPage('windows')"><div class="hc-icon">🖥️</div><h3>Windows Server</h3><p>Active Directory, DNS, DHCP, Group Policy, PowerShell ile sunucu yönetimi.</p><span class="hc-count">6 Modül</span></div>
+        <div class="home-card" onclick="showPage('network')"><div class="hc-icon">🌐</div><h3>Ağ Yönetimi</h3><p>OSI modeli, IP adresleme, VLAN, VPN, firewall ve ağ izleme.</p><span class="hc-count">6 Modül</span></div>
+        <div class="home-card" onclick="showPage('itsm')"><div class="hc-icon">🎫</div><h3>ITSM</h3><p>ITIL çerçevesi, incident/problem/change yönetimi, SLA ve ticketing.</p><span class="hc-count">5 Modül</span></div>
+        <div class="home-card" onclick="showPage('hardware')"><div class="hc-icon">🔧</div><h3>Donanım Desteği</h3><p>PC bileşenleri, arıza tespiti, BIOS, yazıcı ve çevre birimi sorunları.</p><span class="hc-count">5 Modül</span></div>
+        <div class="home-card" onclick="showPage('m365')"><div class="hc-icon">☁️</div><h3>Microsoft 365</h3><p>Exchange Online, Teams, SharePoint, OneDrive ve Admin Center yönetimi.</p><span class="hc-count">5 Modül</span></div>
+        <div class="home-card" onclick="showPage('security')"><div class="hc-icon">🔒</div><h3>Siber Güvenlik</h3><p>Tehdit türleri, phishing, malware, MFA, şifreleme ve güvenlik politikaları.</p><span class="hc-count">6 Modül</span></div>
+        <div class="home-card" onclick="showPage('reporting')"><div class="hc-icon">📊</div><h3>Raporlama</h3><p>KPI'lar, Excel dashboard, Power BI, SLA raporları ve veri analizi.</p><span class="hc-count">4 Modül</span></div>
+        <div class="home-card" onclick="showPage('users')"><div class="hc-icon">👥</div><h3>Kullanıcı İşlemleri</h3><p>AD kullanıcı yönetimi, onboarding/offboarding, izinler ve parola politikaları.</p><span class="hc-count">5 Modül</span></div>
+        <div class="home-card" onclick="showPage('azure')"><div class="hc-icon">🌩️</div><h3>Azure / Bulut Bilişim</h3><p>IaaS, PaaS, SaaS, Azure sanal makineler, Azure AD ve maliyet yönetimi.</p><span class="hc-count">5 Modül</span></div>
+        <div class="home-card" onclick="showPage('powershell')"><div class="hc-icon">🤖</div><h3>PowerShell Otomasyon</h3><p>Script yazma, toplu işlemler, görev zamanlama ve IT otomasyonu.</p><span class="hc-count">5 Modül</span></div>
+        <div class="home-card" onclick="showPage('virtualization')"><div class="hc-icon">🖥️</div><h3>Sanallaştırma</h3><p>Hyper-V, VMware, sanal makine yönetimi, snapshot ve kaynak optimizasyonu.</p><span class="hc-count">4 Modül</span></div>
+        <div class="home-card" onclick="showPage('mdm')"><div class="hc-icon">📱</div><h3>MDM / Intune</h3><p>Mobil ve kurumsal cihaz yönetimi, politika dağıtımı, uyumluluk takibi.</p><span class="hc-count">4 Modül</span></div>
+        <div class="home-card" onclick="showPage('database')"><div class="hc-icon">🗄️</div><h3>Veritabanı Temelleri</h3><p>SQL sorguları, yedekleme, SQL Server yönetimi ve temel DBA görevleri.</p><span class="hc-count">4 Modül</span></div>
+        <div class="home-card" onclick="showPage('linux')"><div class="hc-icon">🐧</div><h3>Linux Temelleri</h3><p>Temel komutlar, dosya sistemi, kullanıcı yönetimi ve servis yönetimi.</p><span class="hc-count">5 Modül</span></div>
+        <div class="home-card" onclick="showPage('emailsec')"><div class="hc-icon">📧</div><h3>E-posta Güvenliği</h3><p>SPF, DKIM, DMARC kayıtları, spam koruması ve kimlik avı önleme.</p><span class="hc-count">4 Modül</span></div>
+        <div class="home-card" onclick="showPage('projectmgmt')"><div class="hc-icon">📋</div><h3>IT Proje Yönetimi</h3><p>Agile, Scrum, IT projelerini planlama, kaynak ve risk yönetimi.</p><span class="hc-count">4 Modül</span></div>
+        <div class="home-card" onclick="showPage('budget')"><div class="hc-icon">💼</div><h3>Bütçe & Varlık Yönetimi</h3><p>Donanım envanteri, lisans takibi, TCO hesabı ve maliyet optimizasyonu.</p><span class="hc-count">4 Modül</span></div>
+        <div class="home-card" onclick="showPage('bcpdr')"><div class="hc-icon">🔄</div><h3>BCP / Felaket Kurtarma</h3><p>İş sürekliliği planı, felaket kurtarma, RTO/RPO ve kriz yönetimi.</p><span class="hc-count">4 Modül</span></div>
+        <div class="home-card" onclick="showPage('compliance')"><div class="hc-icon">📜</div><h3>KVKK / ISO 27001</h3><p>Yasal zorunluluklar, veri gizliliği, bilgi güvenliği yönetim sistemi.</p><span class="hc-count">4 Modül</span></div>
+        <div class="home-card" onclick="showPage('solar')"><div class="hc-icon">☀️</div><h3>Güneş Enerjisi & IT</h3><p>SCADA, IoT izleme, saha destek ve yenilenebilir enerji sektöründe IT.</p><span class="hc-count">4 Modül</span></div>
+      </div>
+    </div>
+
+    <!-- WINDOWS SERVER -->
+    <div class="page" id="page-windows">
+      <div class="topic-hero">
+        <div class="topic-icon">🖥️</div>
+        <div><h1>Windows Server</h1><p>Kurulumdan Active Directory yönetimine, DNS'ten Group Policy'ye kadar sunucu yönetiminin temelleri.</p><span class="level-badge">Başlangıç → İleri Seviye</span></div>
+      </div>
+
+      <div class="module open">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">01</div><div class="module-title">Windows Server Nedir? Temel Kavramlar</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Windows Server Nedir?</h2>
+          <p>Windows Server, Microsoft tarafından geliştirilen ve kurumsal ortamlarda kullanılan bir işletim sistemidir. Normal masaüstü Windows'tan farkı; <strong>çok kullanıcılı yönetim, merkezi kimlik doğrulama, dosya/yazıcı paylaşımı ve uygulama barındırma</strong> gibi özelliklere sahip olmasıdır.</p>
+          <div class="grid2">
+            <div class="mini-card"><h4>Yaygın Versiyonlar</h4><p>Windows Server 2016, 2019, 2022. Kurumlarda en yaygın 2019 ve 2022 kullanılır.</p></div>
+            <div class="mini-card"><h4>Rol ve Özellik Farkı</h4><p><strong>Rol:</strong> Sunucunun ana işlevi (DNS, DHCP, AD). <strong>Özellik:</strong> Rolü destekleyen ek bileşen.</p></div>
+          </div>
+          <h2 class="sec">Temel Roller</h2>
+          <table>
+            <tr><th>Rol</th><th>Ne İşe Yarar?</th></tr>
+            <tr><td><strong>Active Directory DS</strong></td><td>Kullanıcı, bilgisayar, grup yönetimi</td></tr>
+            <tr><td><strong>DNS Server</strong></td><td>Alan adı ↔ IP çözümlemesi</td></tr>
+            <tr><td><strong>DHCP Server</strong></td><td>IP adresi otomatik dağıtımı</td></tr>
+            <tr><td><strong>File Server</strong></td><td>Ortak klasör paylaşımı</td></tr>
+            <tr><td><strong>Print Server</strong></td><td>Ağ yazıcısı yönetimi</td></tr>
+            <tr><td><strong>Hyper-V</strong></td><td>Sanallaştırma platformu</td></tr>
+          </table>
+          <div class="tip">Windows Server, küçük ofisten büyük kuruma kadar her ölçekte kullanılabilir. İlk kuracağınız rol genellikle Active Directory'dir.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">02</div><div class="module-title">Active Directory — Kullanıcı ve Grup Yönetimi</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Active Directory (AD) Nedir?</h2>
+          <p>Active Directory, şirketteki tüm kullanıcı hesaplarını, bilgisayarları ve kaynakları <strong>merkezi bir noktadan</strong> yönetmenizi sağlar. Bir kullanıcı "etki alanına" (domain) katılmış herhangi bir bilgisayardan kendi şifresiyle oturum açabilir.</p>
+          <h2 class="sec">Temel Kavramlar</h2>
+          <ul class="list">
+            <li><strong>Domain (Etki Alanı):</strong> Şirketin merkezi yönetim birimi. Örn: <code>smartgunes.local</code></li>
+            <li><strong>Domain Controller (DC):</strong> AD'nin çalıştığı sunucu. Tüm kimlik doğrulamaları buradan geçer.</li>
+            <li><strong>OU (Organizational Unit):</strong> Kullanıcı ve bilgisayarları gruplamak için kullanılan klasör yapısı.</li>
+            <li><strong>Grup:</strong> Ortak izinlere sahip kullanıcı koleksiyonu (Security Group / Distribution Group).</li>
+            <li><strong>GPO (Group Policy Object):</strong> Kullanıcı/bilgisayarlara toplu ayar uygulamak için kullanılan politika.</li>
+          </ul>
+          <h2 class="sec">Temel PowerShell Komutları</h2>
+          <pre><span class="cmd">New-ADUser</span> -Name "Ahmet Yılmaz" -SamAccountName "ahmetyilmaz" `
+  -UserPrincipalName "ahmetyilmaz@smartgunes.local" `
+  -AccountPassword (ConvertTo-SecureString "Parola123!" -AsPlainText -Force) `
+  -Enabled $true
+
+<span class="cmd">Get-ADUser</span> -Filter * | Select-Object Name, SamAccountName, Enabled
+
+<span class="cmd">Add-ADGroupMember</span> -Identity "IT-Ekibi" -Members "ahmetyilmaz"
+
+<span class="cmd">Disable-ADAccount</span> -Identity "ahmetyilmaz"   <span class="comment"># Hesabı devre dışı bırak</span>
+
+<span class="cmd">Get-ADComputer</span> -Filter * | Select-Object Name, OperatingSystem</pre>
+          <div class="warn">Domain Controller'ı doğrudan üretim ortamında değiştirmeden önce mutlaka test ortamında deneyin. Yanlış bir GPO tüm kullanıcıları etkileyebilir.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">03</div><div class="module-title">DNS ve DHCP Yönetimi</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">DNS (Domain Name System)</h2>
+          <p>DNS, <strong>alan adlarını IP adreslerine çeviren</strong> telefon rehberi gibi çalışan sistemdir. Tarayıcıya <code>google.com</code> yazdığınızda, DNS size <code>142.250.185.46</code> IP'sini verir.</p>
+          <table>
+            <tr><th>Kayıt Türü</th><th>Ne İşe Yarar?</th><th>Örnek</th></tr>
+            <tr><td><strong>A</strong></td><td>Alan adı → IPv4 adresi</td><td>server.local → 192.168.1.10</td></tr>
+            <tr><td><strong>CNAME</strong></td><td>Alias (takma ad)</td><td>www → server.local</td></tr>
+            <tr><td><strong>MX</strong></td><td>Mail sunucusu</td><td>mail.smartgunes.local</td></tr>
+            <tr><td><strong>PTR</strong></td><td>IP → Alan adı (ters)</td><td>192.168.1.10 → server.local</td></tr>
+          </table>
+          <h2 class="sec">DHCP (Dynamic Host Configuration Protocol)</h2>
+          <p>DHCP, ağa bağlanan cihazlara <strong>otomatik olarak IP adresi, subnet mask, gateway ve DNS</strong> bilgisi atar. Bu sayede her cihaza elle IP girmek zorunda kalmazsınız.</p>
+          <ul class="list">
+            <li><strong>Scope (Kapsam):</strong> Dağıtılacak IP aralığı. Örn: 192.168.1.100 – 192.168.1.200</li>
+            <li><strong>Lease (Kiralama):</strong> IP'nin kaç gün geçerli olacağı. Genellikle 8 gün.</li>
+            <li><strong>Reservation (Rezervasyon):</strong> Belirli bir cihaza her zaman aynı IP'nin verilmesi (MAC adresine göre).</li>
+            <li><strong>Exclusion:</strong> Dağıtım dışında bırakılan IP'ler (sunuculara genellikle statik IP verilir).</li>
+          </ul>
+          <div class="tip">Sunuculara, yazıcılara ve ağ ekipmanlarına mutlaka <strong>statik IP</strong> verin ya da DHCP rezervasyonu yapın. IP değişirse bağlantı kesilir.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">04</div><div class="module-title">Group Policy (GPO) Yönetimi</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">GPO Nedir?</h2>
+          <p>Group Policy, Active Directory'deki kullanıcı ve bilgisayarlara <strong>toplu ayar, kısıtlama ve yapılandırma</strong> uygulamak için kullanılır. Tek bir GPO ile yüzlerce bilgisayara aynı ayarı uygulayabilirsiniz.</p>
+          <h2 class="sec">Yaygın GPO Kullanım Senaryoları</h2>
+          <ul class="list">
+            <li>Masaüstü duvar kağıdını şirket logosuyla zorla</li>
+            <li>USB depolama cihazlarını engelle</li>
+            <li>Parola uzunluğu ve karmaşıklığı zorunlu kıl</li>
+            <li>Ekran koruyucu ve oturum kilidi süresi belirle</li>
+            <li>Belirli yazılımların kurulumunu engelle</li>
+            <li>Yazıcıları otomatik dağıt</li>
+            <li>Windows Update ayarlarını merkezi yönet</li>
+          </ul>
+          <h2 class="sec">GPO Uygulama Sırası (LSDOU)</h2>
+          <pre><span class="comment"># GPO'lar şu sırayla uygulanır (sonraki öncekini ezer):</span>
+1. <span class="cmd">L</span>ocal  → Yerel bilgisayar politikası
+2. <span class="cmd">S</span>ite   → AD sitesine bağlı politika
+3. <span class="cmd">D</span>omain → Domain düzeyinde politika
+4. <span class="cmd">OU</span>     → Organizational Unit politikası (en spesifik)</pre>
+          <div class="tip">GPO değişikliği anında uygulanmaz. Yeniden başlatma veya <code>gpupdate /force</code> komutu ile tetiklenebilir.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">05</div><div class="module-title">Dosya Sunucusu ve İzin Yönetimi</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Paylaşımlı Klasör ve NTFS İzinleri</h2>
+          <p>Windows Server'da dosya paylaşımı iki katmanlı izin sistemi ile çalışır: <strong>Share (Paylaşım) İzinleri</strong> ve <strong>NTFS İzinleri</strong>. İkisi aynı anda uygulanır, daha kısıtlayıcı olan geçerli olur.</p>
+          <table>
+            <tr><th>İzin Türü</th><th>Kapsam</th><th>Önerilen Uygulama</th></tr>
+            <tr><td>Share İzni</td><td>Yalnızca ağdan erişimde</td><td>"Everyone - Full Control" ver, NTFS ile kısıtla</td></tr>
+            <tr><td>NTFS İzni</td><td>Hem yerel hem ağ erişimi</td><td>Gruplara göre ayrıntılı izin tanımla</td></tr>
+          </table>
+          <h2 class="sec">En İyi Uygulama</h2>
+          <ul class="list">
+            <li>İzinleri kullanıcılara değil, <strong>gruplara</strong> verin. Kullanıcıyı gruba ekleyip çıkarmak yeterli olur.</li>
+            <li><strong>Least Privilege</strong> ilkesi: Kullanıcıya sadece işini yapacak kadar izin verin.</li>
+            <li>Düzenli olarak <strong>izin denetimleri</strong> yapın (kim neye erişebiliyor?).</li>
+          </ul>
+          <div class="warn">Hiçbir kullanıcıya "Domain Admin" yetkisi vermeyin. Ayrı bir yönetici hesabı oluşturun ve sadece gerektiğinde kullanın.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">06</div><div class="module-title">Yedekleme, İzleme ve Bakım</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Yedekleme Stratejisi (3-2-1 Kuralı)</h2>
+          <ul class="list">
+            <li><strong>3</strong> kopya veri tutun</li>
+            <li><strong>2</strong> farklı ortamda saklayın (disk + NAS)</li>
+            <li><strong>1</strong> kopya uzak konumda (bulut veya farklı bina) olsun</li>
+          </ul>
+          <h2 class="sec">Windows Server Backup ile Yedekleme</h2>
+          <pre><span class="comment"># Sunucu yöneticisinden Windows Server Backup özelliğini kurun</span>
+<span class="cmd">Install-WindowsFeature</span> Windows-Server-Backup
+
+<span class="comment"># Kritik bileşenleri yedekle</span>
+<span class="cmd">wbadmin start backup</span> -backupTarget:E: -include:C: -allCritical -quiet</pre>
+          <h2 class="sec">Sunucu Sağlığını İzleme</h2>
+          <ul class="list">
+            <li><strong>Event Viewer:</strong> Sistem, Güvenlik ve Uygulama loglarını takip edin.</li>
+            <li><strong>Performance Monitor:</strong> CPU, RAM, disk ve ağ kullanımını izleyin.</li>
+            <li><strong>Task Manager / Resource Monitor:</strong> Anlık kaynak tüketimini görün.</li>
+            <li><strong>Windows Admin Center:</strong> Web tabanlı modern yönetim arayüzü.</li>
+          </ul>
+          <div class="tip">Kritik event ID'leri: <code>4625</code> = Başarısız giriş, <code>4740</code> = Hesap kilitleme, <code>1074</code> = Sunucu yeniden başlatma.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AĞ YÖNETİMİ -->
+    <div class="page" id="page-network">
+      <div class="topic-hero">
+        <div class="topic-icon">🌐</div>
+        <div><h1>Ağ Yönetimi</h1><p>OSI modelinden VLAN yapılandırmasına, VPN'den firewall yönetimine kadar ağ altyapısının temelleri.</p><span class="level-badge">Başlangıç → İleri Seviye</span></div>
+      </div>
+
+      <div class="module open">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">01</div><div class="module-title">OSI Modeli ve Temel Ağ Kavramları</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">OSI Modeli — 7 Katman</h2>
+          <p>OSI modeli, ağ iletişimini 7 katmana böler. Sorun gidermede "hangi katmanda sorun var?" sorusu çok kritiktir.</p>
+          <table>
+            <tr><th>#</th><th>Katman</th><th>Ne Yapar?</th><th>Örnek</th></tr>
+            <tr><td>7</td><td><strong>Uygulama</strong></td><td>Kullanıcı ile iletişim</td><td>HTTP, FTP, SMTP, DNS</td></tr>
+            <tr><td>6</td><td><strong>Sunum</strong></td><td>Şifreleme, sıkıştırma</td><td>SSL/TLS, JPEG</td></tr>
+            <tr><td>5</td><td><strong>Oturum</strong></td><td>Bağlantı yönetimi</td><td>NetBIOS, RPC</td></tr>
+            <tr><td>4</td><td><strong>Taşıma</strong></td><td>Uçtan uca iletim</td><td>TCP, UDP</td></tr>
+            <tr><td>3</td><td><strong>Ağ</strong></td><td>IP adresleme, yönlendirme</td><td>IP, ICMP, Router</td></tr>
+            <tr><td>2</td><td><strong>Veri Bağlantı</strong></td><td>MAC adresleme</td><td>Ethernet, Switch, MAC</td></tr>
+            <tr><td>1</td><td><strong>Fiziksel</strong></td><td>Kablo, sinyal</td><td>Cat6, Fiber, Wi-Fi</td></tr>
+          </table>
+          <div class="tip">Sorun giderirken alttan yukarı gidin: Önce kablo var mı? → IP alıyor mu? → DNS çözümlüyor mu? → Uygulama açılıyor mu?</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">02</div><div class="module-title">IP Adresleme ve Subnetting</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">IPv4 Adresi Yapısı</h2>
+          <p>IPv4 adresi 32 bit'ten oluşur ve nokta ile ayrılmış 4 oktet halinde gösterilir: <code>192.168.1.100</code>. Her oktet 0–255 arasında değer alır.</p>
+          <h2 class="sec">Özel IP Aralıkları (RFC 1918)</h2>
+          <table>
+            <tr><th>Sınıf</th><th>Aralık</th><th>Yaygın Kullanım</th></tr>
+            <tr><td>A</td><td>10.0.0.0 – 10.255.255.255</td><td>Büyük kurumsal ağlar</td></tr>
+            <tr><td>B</td><td>172.16.0.0 – 172.31.255.255</td><td>Orta ölçekli ağlar</td></tr>
+            <tr><td>C</td><td>192.168.0.0 – 192.168.255.255</td><td>Küçük ofis / ev ağları</td></tr>
+          </table>
+          <h2 class="sec">Subnet Mask ve CIDR</h2>
+          <ul class="list">
+            <li><code>/24</code> → 255.255.255.0 → 254 kullanılabilir host</li>
+            <li><code>/25</code> → 255.255.255.128 → 126 kullanılabilir host</li>
+            <li><code>/16</code> → 255.255.0.0 → 65.534 kullanılabilir host</li>
+          </ul>
+          <div class="tip">Ağ adresi (ilk IP) ve broadcast adresi (son IP) kullanılamaz. /24'te 256 IP var ama 254 kullanılır.</div>
+          <h2 class="sec">Temel Ağ Komutları</h2>
+          <pre><span class="cmd">ipconfig /all</span>          <span class="comment"># Tüm ağ adaptörü bilgisi</span>
+<span class="cmd">ping</span> 8.8.8.8            <span class="comment"># Bağlantı testi</span>
+<span class="cmd">tracert</span> google.com      <span class="comment"># Paket yolunu izle</span>
+<span class="cmd">nslookup</span> google.com     <span class="comment"># DNS sorgusu</span>
+<span class="cmd">netstat</span> -an             <span class="comment"># Açık bağlantılar</span>
+<span class="cmd">arp</span> -a                  <span class="comment"># ARP tablosu (IP-MAC eşleşmesi)</span></pre>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">03</div><div class="module-title">Switch, VLAN ve Ağ Segmentasyonu</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Switch Nedir?</h2>
+          <p>Switch, aynı ağdaki cihazları birbirine bağlayan Layer 2 cihazdır. MAC adres tablosunu tutarak trafiği sadece ilgili porta yönlendirir.</p>
+          <h2 class="sec">VLAN (Virtual LAN)</h2>
+          <p>VLAN, tek bir fiziksel ağı <strong>mantıksal olarak birden fazla ağa bölmenizi</strong> sağlar. Böylece farklı departmanlar aynı switch'e bağlı olsa bile birbirini göremez.</p>
+          <div class="grid2">
+            <div class="mini-card"><h4>VLAN 10 — Yönetim</h4><p>Sunucular ve ağ ekipmanları. Sadece IT erişebilir.</p></div>
+            <div class="mini-card"><h4>VLAN 20 — Kullanıcılar</h4><p>Ofis bilgisayarları. İnternet erişimleri var.</p></div>
+            <div class="mini-card"><h4>VLAN 30 — Misafir Wi-Fi</h4><p>Sadece internete çıkar, iç ağa erişemez.</p></div>
+            <div class="mini-card"><h4>VLAN 40 — IP Kameralar</h4><p>Güvenlik kameraları izole edilir.</p></div>
+          </div>
+          <div class="tip">VLAN segmentasyonu hem güvenliği hem performansı artırır. Misafir ağını mutlaka ayrı VLAN'a alın.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">04</div><div class="module-title">Firewall ve Güvenlik Duvarı Yönetimi</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Firewall Nedir?</h2>
+          <p>Firewall, ağ trafiğini <strong>kural tabanlı olarak filtreleyen</strong> güvenlik cihazdır. Hangi trafiğin geçip hangisinin bloke edileceğini belirler.</p>
+          <h2 class="sec">Kural Türleri</h2>
+          <ul class="list">
+            <li><strong>Inbound (Gelen) Kural:</strong> Dışarıdan içeriye gelen trafik. Örn: 443 portuna (HTTPS) izin ver.</li>
+            <li><strong>Outbound (Giden) Kural:</strong> İçeriden dışarıya giden trafik.</li>
+            <li><strong>Default Deny:</strong> Tanımlı olmayan her trafik engellenir — en güvenli yaklaşım.</li>
+          </ul>
+          <h2 class="sec">Önemli Port Numaraları</h2>
+          <table>
+            <tr><th>Port</th><th>Protokol</th><th>Ne İçin?</th></tr>
+            <tr><td>80</td><td>HTTP</td><td>Web (şifresiz)</td></tr>
+            <tr><td>443</td><td>HTTPS</td><td>Web (şifreli)</td></tr>
+            <tr><td>22</td><td>SSH</td><td>Uzak komut satırı</td></tr>
+            <tr><td>3389</td><td>RDP</td><td>Uzak masaüstü</td></tr>
+            <tr><td>25/587</td><td>SMTP</td><td>E-posta gönderimi</td></tr>
+            <tr><td>53</td><td>DNS</td><td>Alan adı çözümü</td></tr>
+            <tr><td>389/636</td><td>LDAP/LDAPS</td><td>Active Directory</td></tr>
+          </table>
+          <div class="danger">RDP portunu (3389) internete doğrudan açmayın. VPN arkasında kullanın. Açık bırakırsanız brute-force saldırılarına hedef olursunuz.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">05</div><div class="module-title">VPN — Uzaktan Güvenli Erişim</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">VPN Nedir?</h2>
+          <p>VPN (Virtual Private Network), internet üzerinden <strong>şifreli bir tünel</strong> oluşturarak uzaktaki kullanıcıların şirket ağına güvenli bağlanmasını sağlar.</p>
+          <div class="grid2">
+            <div class="mini-card"><h4>Site-to-Site VPN</h4><p>İki ofisi sanki aynı ağdaymış gibi birbirine bağlar. Router-router arası kurulur.</p></div>
+            <div class="mini-card"><h4>Remote Access VPN</h4><p>Evden çalışan kullanıcının şirket ağına bağlanması. OpenVPN, Cisco AnyConnect vb.</p></div>
+          </div>
+          <h2 class="sec">Yaygın VPN Protokolleri</h2>
+          <ul class="list">
+            <li><strong>IPSec/IKEv2:</strong> Hızlı, güvenli. Windows ve mobil cihazlarla uyumlu.</li>
+            <li><strong>OpenVPN:</strong> Açık kaynak, esnek yapılandırma.</li>
+            <li><strong>WireGuard:</strong> Modern, çok hızlı, basit yapılandırma.</li>
+            <li><strong>SSL/TLS VPN:</strong> Tarayıcı üzerinden bağlantı. Fortigate, Palo Alto vb.</li>
+          </ul>
+          <div class="tip">Uzaktan çalışanlar için VPN zorunlu hale getirin. VPN olmadan şirket kaynaklarına erişime izin vermeyin.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">06</div><div class="module-title">Ağ İzleme ve Sorun Giderme</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Sorun Giderme Adımları</h2>
+          <ol class="list">
+            <li><strong>Fiziksel katman:</strong> Kablo takılı mı? LED yanıyor mu?</li>
+            <li><strong>IP adresi:</strong> <code>ipconfig</code> ile kontrol et. APIPA (169.254.x.x) alıyorsa DHCP sorunu var.</li>
+            <li><strong>Ping gateway:</strong> <code>ping 192.168.1.1</code> — router'a ulaşıyor mu?</li>
+            <li><strong>Ping DNS:</strong> <code>ping 8.8.8.8</code> — internete çıkıyor mu?</li>
+            <li><strong>DNS çözümleme:</strong> <code>nslookup google.com</code> — isim çözümlüyor mu?</li>
+          </ol>
+          <h2 class="sec">Ağ İzleme Araçları</h2>
+          <ul class="list">
+            <li><strong>Wireshark:</strong> Paket analizi, trafiği detaylı inceler.</li>
+            <li><strong>PRTG / Zabbix:</strong> Ağ cihazlarını, sunucuları ve servisleri izler, alarm üretir.</li>
+            <li><strong>SolarWinds:</strong> Kurumsal ağ izleme platformu.</li>
+            <li><strong>Ping Plotter:</strong> Latency ve paket kaybını görsel gösterir.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITSM -->
+    <div class="page" id="page-itsm">
+      <div class="topic-hero">
+        <div class="topic-icon">🎫</div>
+        <div><h1>ITSM — IT Servis Yönetimi</h1><p>ITIL çerçevesi, incident/problem/change yönetimi, SLA ve ticketing sistemlerinin temelleri.</p><span class="level-badge">Başlangıç → Orta Seviye</span></div>
+      </div>
+
+      <div class="module open">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">01</div><div class="module-title">ITSM ve ITIL Nedir?</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">ITSM (IT Service Management)</h2>
+          <p>ITSM, IT hizmetlerinin <strong>planlanması, tasarlanması, sunulması, işletilmesi ve iyileştirilmesi</strong> için kullanılan yöntemler bütünüdür. Hedef: IT'yi bir maliyet merkezi değil, iş değeri yaratan bir hizmet olarak yönetmek.</p>
+          <h2 class="sec">ITIL (IT Infrastructure Library)</h2>
+          <p>ITIL, ITSM için en yaygın kullanılan çerçevedir. Şu anda <strong>ITIL 4</strong> versiyonu geçerlidir.</p>
+          <div class="grid2">
+            <div class="mini-card"><h4>Servis Değer Zinciri</h4><p>Plan → Geliştir → Tasarla → Tedarik → Teslim → Destek → İyileştir</p></div>
+            <div class="mini-card"><h4>4 Boyut Modeli</h4><p>Organizasyon & İnsanlar · Bilgi & Teknoloji · Ortaklar & Tedarikçiler · Değer Akışları</p></div>
+          </div>
+          <div class="tip">ITIL sertifikası almak isteyen IT profesyonelleri için: ITIL 4 Foundation sınavı iyi bir başlangıç noktasıdır.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">02</div><div class="module-title">Incident Yönetimi (Olay Yönetimi)</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Incident Nedir?</h2>
+          <p>Incident, <strong>planlanmamış bir hizmet kesintisi veya hizmet kalitesinin düşmesidir</strong>. Örn: Sunucu çöktü, e-postalar gitmiyor, kullanıcı sisteme giremiyor.</p>
+          <h2 class="sec">Incident Yönetim Süreci</h2>
+          <ol class="list">
+            <li><strong>Tespit:</strong> Kullanıcı bildirimi, otomatik alarm veya monitoring</li>
+            <li><strong>Kayıt:</strong> Ticket oluştur, detayları belgele</li>
+            <li><strong>Sınıflandırma:</strong> Kategori ve öncelik belirle</li>
+            <li><strong>Atama:</strong> Doğru ekibe/kişiye yönlendir</li>
+            <li><strong>Araştırma & Tanı:</strong> Kök nedeni bul</li>
+            <li><strong>Çözüm:</strong> Geçici veya kalıcı çözüm uygula</li>
+            <li><strong>Kapama:</strong> Kullanıcıya onaylat, ticket kapat</li>
+          </ol>
+          <h2 class="sec">Öncelik Matrisi</h2>
+          <table>
+            <tr><th>Öncelik</th><th>Etki</th><th>Aciliyet</th><th>Yanıt Süresi</th></tr>
+            <tr><td style="color:var(--red)"><strong>P1 Kritik</strong></td><td>Tüm şirket</td><td>Çok yüksek</td><td>15 dakika</td></tr>
+            <tr><td style="color:var(--yellow)"><strong>P2 Yüksek</strong></td><td>Departman</td><td>Yüksek</td><td>1 saat</td></tr>
+            <tr><td style="color:var(--neon)"><strong>P3 Orta</strong></td><td>Birkaç kişi</td><td>Orta</td><td>4 saat</td></tr>
+            <tr><td style="color:var(--green)"><strong>P4 Düşük</strong></td><td>Tek kişi</td><td>Düşük</td><td>1 iş günü</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">03</div><div class="module-title">Problem ve Change Yönetimi</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Problem Yönetimi</h2>
+          <p>Problem, <strong>bir veya birden fazla incident'ın kök nedenidir</strong>. Incident yönetimi hizmeti hızla restore eder; problem yönetimi ise tekrar olmaması için kök nedeni ortadan kaldırır.</p>
+          <ul class="list">
+            <li><strong>Reaktif:</strong> Incident olduktan sonra kök neden analizi yap</li>
+            <li><strong>Proaktif:</strong> Incident olmadan trenddeki sorunları tespit et</li>
+            <li><strong>Workaround:</strong> Kalıcı çözüme kadar geçici çözüm</li>
+            <li><strong>Known Error:</strong> Kök nedeni bilinen ama henüz çözülmemiş problem</li>
+          </ul>
+          <h2 class="sec">Change Yönetimi</h2>
+          <p>Change (değişiklik), IT altyapısında yapılan <strong>planlanmış modifikasyonlardır</strong>. Amaç: değişikliğin iş sürekliliğini tehdit etmeden uygulanmasını sağlamak.</p>
+          <table>
+            <tr><th>Değişiklik Türü</th><th>Açıklama</th><th>Onay Gerekir mi?</th></tr>
+            <tr><td>Standard Change</td><td>Önceden onaylanmış, düşük riskli rutin işler</td><td>Hayır (önceden onaylı)</td></tr>
+            <tr><td>Normal Change</td><td>CAB onayı gerektiren planlanmış değişiklik</td><td>Evet (CAB)</td></tr>
+            <tr><td>Emergency Change</td><td>Kritik bir sorunu çözmek için acil değişiklik</td><td>Evet (hızlı onay)</td></tr>
+          </table>
+          <div class="tip">CAB = Change Advisory Board. Değişikliği kim, ne zaman, nasıl yapacak ve geri alma planı (rollback) nedir? Bunlar olmadan change kapatılmaz.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">04</div><div class="module-title">SLA, OLA ve KPI Kavramları</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">SLA (Service Level Agreement)</h2>
+          <p>SLA, IT ekibi ile iş birimi (veya müşteri) arasında <strong>hizmet seviyesini tanımlayan anlaşmadır</strong>. Yanıt ve çözüm sürelerini, uptime hedeflerini içerir.</p>
+          <h2 class="sec">Temel Metrikler</h2>
+          <ul class="list">
+            <li><strong>MTTR (Mean Time to Repair):</strong> Ortalama onarım süresi</li>
+            <li><strong>MTBF (Mean Time Between Failures):</strong> Arızalar arası ortalama süre</li>
+            <li><strong>First Call Resolution (FCR):</strong> İlk temasta çözülen ticket oranı</li>
+            <li><strong>Uptime:</strong> %99.9 = ayda ~43 dk kesinti; %99.99 = ayda ~4 dk kesinti</li>
+          </ul>
+          <h2 class="sec">OLA (Operational Level Agreement)</h2>
+          <p>OLA, IT ekipleri arasındaki iç anlaşmadır. Örn: Yazılım ekibi, altyapı ekibine "sunucu talebini 4 saatte karşıla" diyebilir.</p>
+          <div class="warn">SLA ihlali gerçekleştiğinde bunu gizlemeyin. Neden ihlal edildiğini belgeleyin ve tekrar olmaması için önlem alın.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">05</div><div class="module-title">Ticketing Sistemleri ve En İyi Pratikler</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Yaygın Ticketing Araçları</h2>
+          <ul class="list">
+            <li><strong>ServiceNow:</strong> Kurumsal düzeyde en yaygın ITSM platformu</li>
+            <li><strong>Jira Service Management:</strong> Yazılım ekiplerine yakın yapı</li>
+            <li><strong>Freshservice:</strong> Küçük/orta ölçekli şirketler için uygun</li>
+            <li><strong>Zendesk:</strong> Müşteri destek odaklı</li>
+            <li><strong>ManageEngine:</strong> Uygun fiyatlı kurumsal çözüm</li>
+          </ul>
+          <h2 class="sec">İyi Bir Ticket Nasıl Yazılır?</h2>
+          <ul class="list">
+            <li><strong>Başlık:</strong> Net ve açıklayıcı. "Sorun var" değil "Muhasebe departmanı yazıcıya bağlanamıyor"</li>
+            <li><strong>Etki:</strong> Kaç kişi etkileniyor? Hangi iş süreci durdu?</li>
+            <li><strong>Yeniden üretme adımları:</strong> Sorun nasıl oluşuyor?</li>
+            <li><strong>Yapılan işlemler:</strong> Şimdiye kadar ne denendi?</li>
+            <li><strong>Ekler:</strong> Ekran görüntüsü, log dosyası</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- DONANIM DESTEĞİ -->
+    <div class="page" id="page-hardware">
+      <div class="topic-hero">
+        <div class="topic-icon">🔧</div>
+        <div><h1>Donanım Desteği</h1><p>PC bileşenlerinden arıza tespitine, BIOS ayarlarından yazıcı sorunlarına kadar donanım destek rehberi.</p><span class="level-badge">Başlangıç → Orta Seviye</span></div>
+      </div>
+
+      <div class="module open">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">01</div><div class="module-title">PC Bileşenleri ve Görevleri</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <table>
+            <tr><th>Bileşen</th><th>Görevi</th><th>Sorun Belirtisi</th></tr>
+            <tr><td><strong>CPU</strong></td><td>İşlemci — tüm hesaplamaları yapar</td><td>Aşırı ısınma, yavaşlama, mavi ekran</td></tr>
+            <tr><td><strong>RAM</strong></td><td>Geçici bellek — aktif verileri tutar</td><td>Rastgele kapanma, mavi ekran, yavaşlık</td></tr>
+            <tr><td><strong>SSD/HDD</strong></td><td>Kalıcı depolama</td><td>Yavaş açılış, dosya hatası, S.M.A.R.T. uyarısı</td></tr>
+            <tr><td><strong>GPU</strong></td><td>Grafik işlemleri</td><td>Ekran bozukluğu, driver çökmesi</td></tr>
+            <tr><td><strong>Anakart</strong></td><td>Tüm bileşenleri birbirine bağlar</td><td>POST hatası, bip sesi kodları</td></tr>
+            <tr><td><strong>PSU</strong></td><td>Güç kaynağı</td><td>Açılmama, rastgele kapanma</td></tr>
+            <tr><td><strong>NIC</strong></td><td>Ağ kartı</td><td>Ağ bağlantısı yok/kesik</td></tr>
+          </table>
+          <div class="tip">Bir bileşeni değiştirmeden önce mümkünse başka bir sistemde test edin. Sorunun bileşenden mi yoksa yuvadan mı kaynaklandığını böyle anlarsınız.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">02</div><div class="module-title">Sistematik Arıza Tespiti</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">POST (Power-On Self Test)</h2>
+          <p>Bilgisayar açılırken anakart tüm bileşenleri test eder. Hata varsa <strong>bip sesi kodu</strong> veya ekranda hata mesajı görünür.</p>
+          <h2 class="sec">Açılmayan Bilgisayar — Kontrol Listesi</h2>
+          <ol class="list">
+            <li>Güç kablosu takılı mı? Priz çalışıyor mu?</li>
+            <li>PSU açma düğmesi açık mı?</li>
+            <li>RAM doğru yuvada ve tam oturmuş mu? Çıkarıp takın.</li>
+            <li>CMOS pili boş olabilir — çıkarıp 30 sn bekleyin, takın.</li>
+            <li>Harici donanımları (USB, harici disk) çıkarın, sadece monitör ve klavye ile deneyin.</li>
+            <li>Anakart hoparlörü varsa bip kodlarını dinleyin.</li>
+          </ol>
+          <h2 class="sec">Windows Sorun Giderme Araçları</h2>
+          <pre><span class="cmd">sfc /scannow</span>              <span class="comment"># Sistem dosyası bütünlük denetimi</span>
+<span class="cmd">DISM /Online /Cleanup-Image /RestoreHealth</span>
+<span class="cmd">chkdsk C: /f /r</span>          <span class="comment"># Disk hata tarama (yeniden başlatmada çalışır)</span>
+<span class="cmd">mdsched.exe</span>              <span class="comment"># Windows Bellek Tanılama</span>
+<span class="cmd">eventvwr.msc</span>             <span class="comment"># Olay Görüntüleyici — hata logları</span></pre>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">03</div><div class="module-title">BIOS / UEFI ve Önyükleme Sorunları</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">BIOS ve UEFI Farkı</h2>
+          <ul class="list">
+            <li><strong>BIOS:</strong> Eski sistem. Sadece MBR disk destekler, max 2 TB disk.</li>
+            <li><strong>UEFI:</strong> Modern sistem. GPT disk destekler, 2 TB üstü, daha hızlı açılış, Secure Boot.</li>
+          </ul>
+          <h2 class="sec">Önyükleme Sorunları</h2>
+          <table>
+            <tr><th>Hata</th><th>Olası Neden</th><th>Çözüm</th></tr>
+            <tr><td>BOOTMGR is missing</td><td>Boot sektörü bozuk</td><td>Windows USB → Startup Repair</td></tr>
+            <tr><td>Operating system not found</td><td>Boot sırası yanlış/disk arızalı</td><td>BIOS'ta boot sırası kontrol et</td></tr>
+            <tr><td>BSOD 0x0000007B</td><td>Disk controller sürücüsü</td><td>BIOS'ta SATA modu kontrol</td></tr>
+          </table>
+          <div class="tip">Windows Recovery ortamına girmek için açılışta F8 veya Shift+Restart → Sorun Gider → Gelişmiş Seçenekler yolunu kullanın.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">04</div><div class="module-title">Yazıcı ve Çevre Birimi Desteği</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Yazıcı Sorunları ve Çözümleri</h2>
+          <table>
+            <tr><th>Sorun</th><th>Kontrol Et</th></tr>
+            <tr><td>Yazıcı görünmüyor</td><td>Kablo/ağ bağlantısı, sürücü kurulu mu?</td></tr>
+            <tr><td>Yazdırmıyor ama kuyrukta iş var</td><td>Print Spooler servisini yeniden başlat</td></tr>
+            <tr><td>Baskı soluk/şeritli</td><td>Toner/mürekkep düzeyi, kafa temizleme</td></tr>
+            <tr><td>Kağıt sıkışması</td><td>Kağıdı nazikçe çıkar, silindiri temizle</td></tr>
+          </table>
+          <h2 class="sec">Print Spooler Sıfırlama</h2>
+          <pre><span class="cmd">net stop spooler</span>
+del /Q /F /S "%systemroot%\System32\spool\PRINTERS\*.*"
+<span class="cmd">net start spooler</span></pre>
+          <h2 class="sec">Ağ Yazıcısı Ekleme</h2>
+          <pre><span class="cmd">Ayarlar → Bluetooth ve cihazlar → Yazıcı ekle</span>
+<span class="comment"># Veya IP ile doğrudan ekle:</span>
+<span class="cmd">Yazıcı ekle → İstediğim yazıcı listede yok → TCP/IP adres veya hostname ile ekle</span></pre>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">05</div><div class="module-title">Dizüstü Bilgisayar Bakımı ve Yaygın Sorunlar</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Yaygın Laptop Sorunları</h2>
+          <ul class="list">
+            <li><strong>Batarya şarj olmuyor:</strong> Şarj kablosu/adaptör arızalı mı? Batarya kalibrasyonu gerekiyor mu?</li>
+            <li><strong>Aşırı ısınma:</strong> Fan havalandırmasını temizle. Termal macun yenilemesi gerekebilir.</li>
+            <li><strong>Wi-Fi bağlanmıyor:</strong> Fn+F2 (Wi-Fi tuşu) açık mı? Sürücü güncel mi?</li>
+            <li><strong>Klavye tuşları çalışmıyor:</strong> Fiziksel hasar mı, yoksa sürücü mü? On-Screen Keyboard ile test et.</li>
+            <li><strong>Ekran siyah ama çalışıyor:</strong> Fn+F8 (monitör değiştirme). Harici monitöre bağla ve test et.</li>
+          </ul>
+          <div class="warn">Kullanıcı laptopunu kendiniz açmadan önce garanti durumunu kontrol edin. Garanti kapsamındaysa yetkili servis daha uygun olabilir.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MICROSOFT 365 -->
+    <div class="page" id="page-m365">
+      <div class="topic-hero">
+        <div class="topic-icon">☁️</div>
+        <div><h1>Microsoft 365</h1><p>Exchange Online, Teams, SharePoint, OneDrive ve Admin Center yönetiminin temelleri.</p><span class="level-badge">Başlangıç → Orta Seviye</span></div>
+      </div>
+
+      <div class="module open">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">01</div><div class="module-title">Microsoft 365 Admin Center Yönetimi</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Admin Center Nedir?</h2>
+          <p>Microsoft 365 Admin Center (<code>admin.microsoft.com</code>), tüm M365 hizmetlerini yönettiğiniz merkezi paneldir. Kullanıcı oluşturma, lisans atama, parola sıfırlama gibi işlemleri buradan yaparsınız.</p>
+          <h2 class="sec">Temel İşlemler</h2>
+          <ul class="list">
+            <li><strong>Kullanıcı oluşturma:</strong> Kullanıcılar → Etkin kullanıcılar → Kullanıcı ekle</li>
+            <li><strong>Lisans atama:</strong> Kullanıcı → Lisanslar ve uygulamalar sekmesi</li>
+            <li><strong>Parola sıfırlama:</strong> Kullanıcı → Parola sıfırla → Otomatik oluştur veya kendiniz belirleyin</li>
+            <li><strong>MFA zorunlu kılma:</strong> Güvenlik → Kimlik doğrulama yöntemleri</li>
+            <li><strong>Grup oluşturma:</strong> Microsoft 365 Grupları, Dağıtım Listesi, Güvenlik Grubu</li>
+          </ul>
+          <div class="tip">Admin Center'da yapılan değişiklikler bazen 1-24 saat içinde yansır. Acil durumlarda PowerShell daha hızlı sonuç verir.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">02</div><div class="module-title">Exchange Online — E-posta Yönetimi</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Temel Exchange Kavramları</h2>
+          <ul class="list">
+            <li><strong>Mailbox:</strong> Kullanıcının e-posta kutusu. Lisansa göre boyutu değişir (50 GB – sınırsız).</li>
+            <li><strong>Shared Mailbox:</strong> Birden fazla kullanıcının eriştiği ortak posta kutusu. Lisans gerektirmez (50 GB altı).</li>
+            <li><strong>Distribution Group:</strong> E-posta listesi — gruba yazılan mail tüm üyelere gider.</li>
+            <li><strong>Mail Flow Rule:</strong> E-postaları kurallara göre yönlendirme/engelleme.</li>
+          </ul>
+          <h2 class="sec">Sık Yapılan İşlemler</h2>
+          <pre><span class="comment"># PowerShell ile Exchange Online bağlantısı</span>
+<span class="cmd">Connect-ExchangeOnline</span> -UserPrincipalName admin@sirket.com
+
+<span class="comment"># Shared mailbox erişimi ver</span>
+<span class="cmd">Add-MailboxPermission</span> -Identity "info@sirket.com" `
+  -User "ahmet@sirket.com" -AccessRights FullAccess
+
+<span class="comment"># Otomatik yanıt aç</span>
+<span class="cmd">Set-MailboxAutoReplyConfiguration</span> -Identity "ahmet@sirket.com" `
+  -AutoReplyState Enabled -InternalMessage "Ofis dışındayım."</pre>
+          <h2 class="sec">E-posta Teslim Sorunları</h2>
+          <ul class="list">
+            <li>Admin Center → <strong>Message Trace</strong> ile e-postanın nerede takıldığını görün</li>
+            <li>Spam filtresi tarafından tutuldu mu? Karantina kontrol edin.</li>
+            <li>MX kaydı doğru mu? <code>nslookup -type=mx sirket.com</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">03</div><div class="module-title">Microsoft Teams Yönetimi</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Teams Admin Center</h2>
+          <p>Teams yönetimini <code>admin.teams.microsoft.com</code> üzerinden yaparsınız. Politika yönetimi, toplantı ayarları, telefon sistemi ve uygulama izinleri burada kontrol edilir.</p>
+          <h2 class="sec">Sık Karşılaşılan Sorunlar</h2>
+          <table>
+            <tr><th>Sorun</th><th>Çözüm</th></tr>
+            <tr><td>Toplantıya giremiyorum</td><td>Cache temizle, uygulamayı yeniden başlat veya web sürümünü dene</td></tr>
+            <tr><td>Kamera/mikrofon çalışmıyor</td><td>Windows gizlilik ayarları → Kamera/mikrofon izinleri</td></tr>
+            <tr><td>Teams yavaş açılıyor</td><td>Uygulama cache temizle: <code>%appdata%\Microsoft\Teams</code> klasörünü sil</td></tr>
+            <tr><td>Kanal mesajı gitmiyor</td><td>Konuk erişim politikası, kanal izinleri kontrol et</td></tr>
+          </table>
+          <pre><span class="comment"># Teams cache temizleme (Windows)</span>
+<span class="cmd">taskkill /IM Teams.exe /F</span>
+<span class="cmd">rmdir /s /q "%appdata%\Microsoft\Teams"</span>
+<span class="comment"># Teams'i tekrar başlatın, cache yeniden oluşur</span></pre>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">04</div><div class="module-title">SharePoint ve OneDrive Yönetimi</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">SharePoint vs OneDrive</h2>
+          <div class="grid2">
+            <div class="mini-card"><h4>OneDrive</h4><p>Kişisel bulut depolama. Her kullanıcının kendine ait alanı. 1 TB varsayılan.</p></div>
+            <div class="mini-card"><h4>SharePoint</h4><p>Ekip/departman ortak depolama ve intranet sitesi. Birlikte çalışma için.</p></div>
+          </div>
+          <h2 class="sec">SharePoint Yönetimi</h2>
+          <ul class="list">
+            <li><strong>Site Koleksiyonu:</strong> Şirket içi bölümlere göre ayrı siteler oluşturun</li>
+            <li><strong>İzin Seviyeleri:</strong> Sahip (Full Control) → Üye (Edit) → Ziyaretçi (Read)</li>
+            <li><strong>Sürüm Geçmişi:</strong> Dosyaların önceki versiyonlarına erişim sağlar</li>
+            <li><strong>Geri Dönüşüm Kutusu:</strong> Silinen dosyalar 93 gün saklanır</li>
+          </ul>
+          <div class="tip">SharePoint izinleri karmaşıklaşabilir. İzin devrini (inheritance) kırarak klasör düzeyinde özel izin vermekten mümkün olduğunca kaçının.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">05</div><div class="module-title">Lisanslama ve Maliyet Yönetimi</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Yaygın M365 Lisans Planları</h2>
+          <table>
+            <tr><th>Plan</th><th>İçerir</th><th>Hedef Kitle</th></tr>
+            <tr><td>M365 Business Basic</td><td>Teams, Exchange, SharePoint (web)</td><td>Küçük işletme</td></tr>
+            <tr><td>M365 Business Standard</td><td>+ Office uygulamaları (masaüstü)</td><td>Orta ölçekli</td></tr>
+            <tr><td>M365 E3</td><td>+ Gelişmiş güvenlik, uyumluluk</td><td>Kurumsal</td></tr>
+            <tr><td>M365 E5</td><td>+ Power BI Pro, Defender, Sentinel</td><td>Büyük kurumsal</td></tr>
+          </table>
+          <h2 class="sec">Lisans Optimizasyonu</h2>
+          <ul class="list">
+            <li>90+ gün oturum açmayan kullanıcıların lisansını gözden geçirin</li>
+            <li>Ayrılan çalışanların lisanslarını hemen kaldırın</li>
+            <li>Yalnızca e-posta kullanacak kişilere Exchange Only planı yeterli olabilir</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SİBER GÜVENLİK -->
+    <div class="page" id="page-security">
+      <div class="topic-hero">
+        <div class="topic-icon">🔒</div>
+        <div><h1>Siber Güvenlik</h1><p>Tehdit türlerinden savunma stratejilerine, MFA'dan şifrelemeye kadar modern siber güvenlik temelleri.</p><span class="level-badge">Başlangıç → İleri Seviye</span></div>
+      </div>
+
+      <div class="module open">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">01</div><div class="module-title">Temel Tehdit Türleri</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <table>
+            <tr><th>Tehdit</th><th>Nedir?</th><th>Nasıl Korunulur?</th></tr>
+            <tr><td><strong>Phishing</strong></td><td>Sahte e-posta/link ile kimlik bilgisi çalma</td><td>Eğitim, MFA, e-posta filtresi</td></tr>
+            <tr><td><strong>Ransomware</strong></td><td>Dosyaları şifreleyip fidye isteme</td><td>Yedekleme, EDR, patch yönetimi</td></tr>
+            <tr><td><strong>Malware</strong></td><td>Zararlı yazılım (virüs, trojan, spyware)</td><td>Antivirus, davranış analizi</td></tr>
+            <tr><td><strong>Social Engineering</strong></td><td>İnsanı manipüle ederek bilgi alma</td><td>Farkındalık eğitimi</td></tr>
+            <tr><td><strong>Man-in-the-Middle</strong></td><td>İletişimi araya girerek dinleme</td><td>HTTPS, VPN, sertifika doğrulama</td></tr>
+            <tr><td><strong>Brute Force</strong></td><td>Parola tahmin saldırısı</td><td>Hesap kilitleme, MFA, güçlü parola</td></tr>
+            <tr><td><strong>Insider Threat</strong></td><td>Kötü niyetli iç çalışan</td><td>Least privilege, log izleme</td></tr>
+          </table>
+          <div class="danger">Ransomware saldırısında sistemleri izole edin, kapatmayın. Forensic inceleme için kanıt korunmalıdır. Hemen IT güvenlik ekibini ve yönetimi bilgilendirin.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">02</div><div class="module-title">MFA ve Kimlik Yönetimi</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">MFA (Multi-Factor Authentication)</h2>
+          <p>MFA, kimlik doğrulamayı <strong>iki veya daha fazla faktörle</strong> güçlendirir. Parola çalınsa bile hesaba girilemez.</p>
+          <ul class="list">
+            <li><strong>Bilgi faktörü:</strong> Parola, PIN</li>
+            <li><strong>Sahip olma faktörü:</strong> Telefon (SMS kodu, authenticator uygulaması)</li>
+            <li><strong>Biyometri faktörü:</strong> Parmak izi, yüz tanıma</li>
+          </ul>
+          <h2 class="sec">MFA Yöntemleri (Güvenden Zayıfa)</h2>
+          <ol class="list">
+            <li>🟢 <strong>FIDO2 / Hardware Key (YubiKey):</strong> En güvenli</li>
+            <li>🟢 <strong>Authenticator uygulaması (Microsoft/Google Authenticator):</strong> Çok güvenli</li>
+            <li>🟡 <strong>Push notification:</strong> MFA fatigue saldırısına açık</li>
+            <li>🔴 <strong>SMS kodu:</strong> SIM swap saldırısına açık — mümkünse kullanmayın</li>
+          </ol>
+          <div class="tip">Microsoft 365'te Conditional Access ile MFA'yı sadece belirli koşullarda (şirket dışı erişim, yeni cihaz) zorunlu kılabilirsiniz.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">03</div><div class="module-title">Parola Politikaları ve En İyi Pratikler</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Güçlü Parola Nedir?</h2>
+          <ul class="list">
+            <li>En az <strong>12 karakter</strong> (NIST önerisi: 16+)</li>
+            <li>Büyük harf, küçük harf, rakam ve özel karakter</li>
+            <li>Kişisel bilgi içermemeli (isim, doğum tarihi)</li>
+            <li>Farklı servislerde <strong>farklı parola</strong> kullanılmalı</li>
+          </ul>
+          <h2 class="sec">Parola Yöneticisi</h2>
+          <p>Her hesap için farklı ve güçlü parola oluşturmak için parola yöneticisi kullanın: <strong>Bitwarden</strong> (ücretsiz, açık kaynak), <strong>1Password</strong>, <strong>KeePass</strong>.</p>
+          <h2 class="sec">AD Parola Politikası (GPO)</h2>
+          <pre><span class="comment"># GPO: Computer Config → Windows Settings → Security Settings → Account Policy</span>
+Minimum parola uzunluğu : <span class="cmd">12 karakter</span>
+Parola karmaşıklığı     : <span class="cmd">Etkin</span>
+Parola geçerlilik süresi: <span class="cmd">90 gün</span> (veya süresiz + MFA zorunlu)
+Hesap kilitleme eşiği   : <span class="cmd">5 başarısız deneme</span>
+Kilitleme süresi        : <span class="cmd">30 dakika</span></pre>
+          <div class="warn">NIST'in yeni önerisi: Parola periyodik olarak değiştirmeyi zorunlu kılmak güvenliği artırmıyor, aksine zayıf parola seçimine yol açıyor. MFA daha etkili.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">04</div><div class="module-title">Şifreleme Temelleri</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Şifreleme Nedir?</h2>
+          <p>Şifreleme, veriyi <strong>yetkisiz kişilerin okuyamayacağı</strong> hale getirir. Anahtar olmadan veri okunamaz.</p>
+          <div class="grid2">
+            <div class="mini-card"><h4>Simetrik Şifreleme</h4><p>Şifreleme ve çözme için aynı anahtar kullanılır. Hızlı. Örn: AES-256</p></div>
+            <div class="mini-card"><h4>Asimetrik Şifreleme</h4><p>Açık anahtar (herkese açık) + Özel anahtar (gizli). Örn: RSA, TLS</p></div>
+          </div>
+          <h2 class="sec">Disk Şifreleme — BitLocker</h2>
+          <pre><span class="comment"># BitLocker durumunu kontrol et</span>
+<span class="cmd">manage-bde -status C:</span>
+
+<span class="comment"># BitLocker'ı etkinleştir (TPM gerekli)</span>
+<span class="cmd">Enable-BitLocker</span> -MountPoint "C:" -EncryptionMethod XtsAes256 `
+  -RecoveryPasswordProtector</pre>
+          <div class="tip">Tüm şirket laptoplarında BitLocker zorunlu olmalı. Laptop kaybolursa veri çalınamaz.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">05</div><div class="module-title">Log Yönetimi ve SIEM</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Log Yönetimi</h2>
+          <p>Loglar, sistemde ne olduğunu belgeleyen kayıtlardır. Güvenlik olaylarını tespit etmek ve soruşturmak için kritiktir.</p>
+          <h2 class="sec">Kritik Windows Event ID'leri</h2>
+          <table>
+            <tr><th>Event ID</th><th>Anlam</th></tr>
+            <tr><td>4624</td><td>Başarılı oturum açma</td></tr>
+            <tr><td>4625</td><td>Başarısız oturum açma</td></tr>
+            <tr><td>4648</td><td>Farklı kimlik bilgileriyle oturum açma</td></tr>
+            <tr><td>4740</td><td>Hesap kilitleme</td></tr>
+            <tr><td>4728/4732</td><td>Gruba üye eklendi</td></tr>
+            <tr><td>4720</td><td>Yeni kullanıcı hesabı oluşturuldu</td></tr>
+            <tr><td>7045</td><td>Yeni servis kuruldu</td></tr>
+          </table>
+          <h2 class="sec">SIEM</h2>
+          <p>SIEM (Security Information and Event Management), tüm sistemlerden logları toplayarak <strong>korelasyon analizi</strong> yapar ve anormal davranışları tespit eder. Örn: Microsoft Sentinel, Splunk, IBM QRadar.</p>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">06</div><div class="module-title">Güvenlik Farkındalık Eğitimi</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">İnsan Faktörü</h2>
+          <p>Güvenlik ihlallerinin <strong>%85'inden fazlası</strong> insan hatasından kaynaklanır. En güçlü teknik savunma bile eğitimsiz bir kullanıcıyla çökebilir.</p>
+          <h2 class="sec">Kullanıcılara Öğretilmesi Gerekenler</h2>
+          <ul class="list">
+            <li>Şüpheli e-postayı açmadan önce göndereni doğrula</li>
+            <li>Linke tıklamadan önce URL'yi incele (hover ile)</li>
+            <li>IT, telefonda asla parola sormaz</li>
+            <li>USB bulsan bile takma</li>
+            <li>Ekran kilitlemeden uzaklaşma (Win+L)</li>
+            <li>Şüpheli durumu hemen IT'ye bildir, utanma</li>
+          </ul>
+          <h2 class="sec">Simüle Phishing Testi</h2>
+          <p>Microsoft Defender for Office 365 içindeki <strong>Attack Simulator</strong> ile kullanıcılara sahte phishing maili gönderip farkındalık ölçebilirsiniz.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RAPORLAMA -->
+    <div class="page" id="page-reporting">
+      <div class="topic-hero">
+        <div class="topic-icon">📊</div>
+        <div><h1>Raporlama</h1><p>IT metriklerinden KPI takibine, Excel dashboard'larından Power BI'a kadar veri tabanlı IT yönetimi.</p><span class="level-badge">Başlangıç → Orta Seviye</span></div>
+      </div>
+
+      <div class="module open">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">01</div><div class="module-title">IT Metrikleri ve KPI'lar</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Yardım Masası KPI'ları</h2>
+          <table>
+            <tr><th>KPI</th><th>Formül / Açıklama</th><th>Hedef</th></tr>
+            <tr><td>Ticket Hacmi</td><td>Dönemde açılan toplam ticket sayısı</td><td>Trend takibi</td></tr>
+            <tr><td>İlk Yanıt Süresi</td><td>Ticket açılış → ilk yanıt arası süre</td><td>SLA'ya göre</td></tr>
+            <tr><td>Ortalama Çözüm Süresi</td><td>Toplam çözüm süresi / ticket sayısı</td><td>↓ daha iyi</td></tr>
+            <tr><td>FCR (First Contact Resolution)</td><td>İlk temasta çözülen / toplam × 100</td><td>%70+</td></tr>
+            <tr><td>SLA Uyum Oranı</td><td>SLA içinde çözülen / toplam × 100</td><td>%95+</td></tr>
+            <tr><td>Backlog</td><td>Çözümsüz bekleyen ticket sayısı</td><td>↓ daha iyi</td></tr>
+            <tr><td>Kullanıcı Memnuniyeti (CSAT)</td><td>Anket puanı ortalaması</td><td>4/5+</td></tr>
+          </table>
+          <div class="tip">Okan'ın 1.5 yılda 1.159 ticket kapatması, aylık ~64 ticket / günlük ~2.1 ticket anlamına gelir. Bu FCR ve SLA uyum oranıyla birleşince güçlü bir performans hikayesi oluşturur.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">02</div><div class="module-title">Excel ile IT Dashboard Oluşturma</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Pivot Tablo ile Ticket Analizi</h2>
+          <ol class="list">
+            <li>Ticketing sisteminden CSV olarak veri dışa aktarın</li>
+            <li>Excel'e aktarın → Tablo olarak biçimlendirin (Ctrl+T)</li>
+            <li>Ekle → PivotTable → Yeni sayfaya</li>
+            <li>Satır: Kategori, Sütun: Ay, Değer: Ticket sayısı (Sayım)</li>
+          </ol>
+          <h2 class="sec">Temel Excel Formülleri</h2>
+          <pre><span class="comment"># Ortalama çözüm süresi (saat cinsinden)</span>
+=ORTALAMA(F2:F1000)
+
+<span class="comment"># SLA uyum oranı (%)</span>
+=EĞERSAY(G2:G1000,"SLA İçinde")/SATIRSAY(G2:G1000)*100
+
+<span class="comment"># Kategoriye göre ticket sayısı</span>
+=EĞERSAY(B2:B1000,"Donanım")</pre>
+          <h2 class="sec">Dashboard Bileşenleri</h2>
+          <ul class="list">
+            <li><strong>Özet kartlar:</strong> Toplam ticket, çözülen, bekleyen, SLA uyum %</li>
+            <li><strong>Aylık trend çizgi grafiği:</strong> Ticket hacminin zamanla değişimi</li>
+            <li><strong>Kategori pasta grafiği:</strong> Hangi tür sorunlar en çok geliyor?</li>
+            <li><strong>Öncelik dağılımı:</strong> P1/P2/P3/P4 oranları</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">03</div><div class="module-title">Power BI ile İleri Analiz</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Power BI Nedir?</h2>
+          <p>Power BI, Microsoft'un <strong>iş zekası ve görselleştirme</strong> aracıdır. Excel'den daha güçlü, etkileşimli ve paylaşılabilir dashboard'lar oluşturabilirsiniz.</p>
+          <h2 class="sec">Başlangıç Adımları</h2>
+          <ol class="list">
+            <li>powerbi.microsoft.com'dan Power BI Desktop'ı indirin (ücretsiz)</li>
+            <li>Veri Al → Excel / CSV / SQL → Verinizi bağlayın</li>
+            <li>Power Query ile veriyi temizleyin</li>
+            <li>Görselleştirme panelinden grafik seçin, alanlara sürükleyin</li>
+            <li>Dashboard'u Power BI Service'e yayınlayın (M365 lisansı gerekir)</li>
+          </ol>
+          <h2 class="sec">Yararlı DAX Formülleri</h2>
+          <pre><span class="comment">-- Toplam kapatılan ticket</span>
+Kapatılan = CALCULATE(COUNTA('Tickets'[ID]), 'Tickets'[Durum]="Kapalı")
+
+<span class="comment">-- SLA uyum oranı</span>
+SLA% = DIVIDE(
+  CALCULATE(COUNTA('Tickets'[ID]),'Tickets'[SLA]="İçinde"),
+  COUNTA('Tickets'[ID])
+) * 100</pre>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">04</div><div class="module-title">Yönetime Rapor Sunma</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Yönetici Raporunda Bulunması Gerekenler</h2>
+          <ul class="list">
+            <li><strong>Özet:</strong> Bu dönem ne yaptık? Kaç ticket, ortalama çözüm süresi neydi?</li>
+            <li><strong>Trend:</strong> Geçen dönemle karşılaştırma. İyileşti mi, kötüleşti mi?</li>
+            <li><strong>Öne çıkan başarılar:</strong> SLA uyum, FCR oranı</li>
+            <li><strong>Sorunlar:</strong> Tekrar eden problemler, kök neden analizi</li>
+            <li><strong>Öneri:</strong> İyileştirme için ne yapılabilir?</li>
+          </ul>
+          <div class="tip">Yönetime rapor sunarken rakamlarla konuşun. "Çok çalıştık" yerine "SLA uyum oranımız %97, geçen çeyreğe göre 3 puan arttı" deyin.</div>
+          <div class="warn">Sadece başarıları değil, sorunları da raporlayın. Gizlenen sorunlar zamanla büyür. Şeffaflık güven oluşturur.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KULLANICI İŞLEMLERİ -->
+    <div class="page" id="page-users">
+      <div class="topic-hero">
+        <div class="topic-icon">👥</div>
+        <div><h1>Kullanıcı İşlemleri</h1><p>Active Directory kullanıcı yönetiminden onboarding/offboarding süreçlerine, izin yönetiminden parola politikalarına.</p><span class="level-badge">Başlangıç → Orta Seviye</span></div>
+      </div>
+
+      <div class="module open">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">01</div><div class="module-title">Kullanıcı Onboarding (İşe Başlatma)</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Onboarding Kontrol Listesi</h2>
+          <ul class="list">
+            <li>☐ <strong>AD hesabı oluştur:</strong> Standart adlandırma kuralına uy (ahmetyilmaz / a.yilmaz)</li>
+            <li>☐ <strong>Microsoft 365 lisansı ata</strong></li>
+            <li>☐ <strong>E-posta hesabını aktifleştir</strong></li>
+            <li>☐ <strong>Doğru gruplara ekle:</strong> Departman grubu, paylaşılan posta kutuları, Teams kanalları</li>
+            <li>☐ <strong>Bilgisayarı domain'e ekle</strong></li>
+            <li>☐ <strong>Gerekli yazılımları kur:</strong> Office, VPN, antivirüs, departmana özgü yazılımlar</li>
+            <li>☐ <strong>VPN erişimi tanımla</strong></li>
+            <li>☐ <strong>Gerekli klasörlere erişim izni ver</strong></li>
+            <li>☐ <strong>MFA kaydetmesini sağla</strong></li>
+            <li>☐ <strong>IT güvenlik kurallarını anlat/imzalat</strong></li>
+          </ul>
+          <pre><span class="comment"># Hızlı AD kullanıcı oluşturma</span>
+<span class="cmd">New-ADUser</span> -Name "Ahmet Yılmaz" `
+  -GivenName "Ahmet" -Surname "Yılmaz" `
+  -SamAccountName "ahmetyilmaz" `
+  -UserPrincipalName "ahmetyilmaz@sirket.com" `
+  -Department "Satış" -Title "Satış Temsilcisi" `
+  -OfficePhone "0212 000 0001" `
+  -Path "OU=Satis,OU=Kullanicilar,DC=sirket,DC=local" `
+  -AccountPassword (Read-Host -AsSecureString "Parola") `
+  -Enabled $true -ChangePasswordAtLogon $true</pre>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">02</div><div class="module-title">Kullanıcı Offboarding (İşten Ayrılma)</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Offboarding Kontrol Listesi</h2>
+          <ul class="list">
+            <li>☐ <strong>AD hesabını devre dışı bırak</strong> (silme — sadece tüm erişim kesildikten sonra)</li>
+            <li>☐ <strong>Tüm şifrelerini sıfırla</strong> (AD, VPN, uygulama hesapları)</li>
+            <li>☐ <strong>Tüm gruplardan çıkar</strong></li>
+            <li>☐ <strong>M365 lisansını kaldır</strong></li>
+            <li>☐ <strong>E-postalarını yöneticiye yönlendir</strong> (yasal süre boyunca)</li>
+            <li>☐ <strong>OneDrive verilerini aktar</strong> (yöneticiye erişim ver)</li>
+            <li>☐ <strong>Aktif oturumları sonlandır</strong></li>
+            <li>☐ <strong>VPN sertifikasını iptal et</strong></li>
+            <li>☐ <strong>Fiziksel erişimi kapat:</strong> Kart, anahtar, bina girişi</li>
+            <li>☐ <strong>Ekipmanları teslim al:</strong> Laptop, telefon, aksesuar</li>
+          </ul>
+          <pre><span class="comment"># Hesabı devre dışı bırak ve oturumu sonlandır</span>
+<span class="cmd">Disable-ADAccount</span> -Identity "ahmetyilmaz"
+<span class="cmd">Get-ADUser</span> "ahmetyilmaz" | Move-ADObject -TargetPath "OU=DeaktifKullanicilar,DC=sirket,DC=local"
+
+<span class="comment"># M365 - tüm aktif oturumları kapat</span>
+<span class="cmd">Revoke-MgUserSignInSession</span> -UserId "ahmetyilmaz@sirket.com"</pre>
+          <div class="danger">Ayrılan çalışanın hesabını hemen kapatın. İş sözleşmesi bitmeden önce IT'nin bilgilendirilmesi kritiktir. Geç kapatılan hesaplar veri sızıntısı riski oluşturur.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">03</div><div class="module-title">Parola Sıfırlama ve Hesap Kilitleme</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Güvenli Parola Sıfırlama Süreci</h2>
+          <ol class="list">
+            <li><strong>Kimlik doğrulama:</strong> Kişinin gerçekten o kullanıcı olduğunu doğrulayın (yüz yüze, video, kurumsal e-posta)</li>
+            <li><strong>Geçici parola oluştur:</strong> Güçlü ve tek seferlik</li>
+            <li><strong>"İlk girişte değiştir" seçeneğini aktif et"</strong></li>
+            <li><strong>Yeni parolayı güvenli ilet:</strong> Telefon veya yüz yüze — asla e-postayla gönderme</li>
+          </ol>
+          <pre><span class="comment"># AD parola sıfırlama</span>
+<span class="cmd">Set-ADAccountPassword</span> -Identity "ahmetyilmaz" `
+  -NewPassword (ConvertTo-SecureString "GeciciParola2024!" -AsPlainText -Force) `
+  -Reset
+<span class="cmd">Set-ADUser</span> -Identity "ahmetyilmaz" -ChangePasswordAtLogon $true
+
+<span class="comment"># Kilitli hesabı aç</span>
+<span class="cmd">Unlock-ADAccount</span> -Identity "ahmetyilmaz"
+
+<span class="comment"># Hangi DC'de kilitlendiğini bul</span>
+<span class="cmd">Get-ADDomainController</span> -Filter * | ForEach {
+  Get-ADUser "ahmetyilmaz" -Server $_.Hostname -Properties LockedOut
+}</pre>
+          <div class="warn">Telefon üzerinden parola isteyenlere dikkat. IT asla telefonda parola sormaz — bu bir social engineering taktiği olabilir.</div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">04</div><div class="module-title">İzin ve Erişim Yönetimi</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Erişim İsteği Süreci</h2>
+          <ol class="list">
+            <li>Kullanıcı erişim talep eder (ticket, form)</li>
+            <li>Yönetici onaylar</li>
+            <li>IT erişimi tanımlar</li>
+            <li>Erişim belgelenir</li>
+            <li>Periyodik erişim gözden geçirmesi yapılır</li>
+          </ol>
+          <h2 class="sec">Erişim Kontrol Modelleri</h2>
+          <ul class="list">
+            <li><strong>RBAC (Role-Based):</strong> Pozisyona göre erişim. "Muhasebe" rolüne sahip herkes muhasebe klasörüne erişir.</li>
+            <li><strong>Least Privilege:</strong> Kişiye sadece işini yapacak minimum izni ver.</li>
+            <li><strong>Need-to-Know:</strong> Bilgiye sadece bilinmesi gereken kişiler erişir.</li>
+          </ul>
+          <h2 class="sec">Periyodik Erişim Gözden Geçirmesi</h2>
+          <p>Her 6 ayda bir veya çalışan pozisyonu değiştiğinde, hangi kullanıcının hangi gruba üye olduğunu gözden geçirin. Artık gerekmeyen erişimleri kaldırın.</p>
+          <pre><span class="comment"># Bir grubun tüm üyelerini listele</span>
+<span class="cmd">Get-ADGroupMember</span> -Identity "Muhasebe-Erisim" | Select Name, SamAccountName</pre>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-header" onclick="toggleModule(this)">
+          <div class="module-num">05</div><div class="module-title">Self-Service ve Kullanıcı Eğitimi</div><div class="module-arrow">▶</div>
+        </div>
+        <div class="module-body">
+          <h2 class="sec">Self-Service Parola Sıfırlama (SSPR)</h2>
+          <p>Microsoft Entra ID (Azure AD) SSPR ile kullanıcılar IT'ye ihtiyaç duymadan kendi parolalarını sıfırlayabilir. Bu hem kullanıcı deneyimini iyileştirir hem de IT'nin yükünü azaltır.</p>
+          <h2 class="sec">Kullanıcı Eğitim Konuları</h2>
+          <ul class="list">
+            <li>Parolayı kimseyle paylaşma, yazıya dökme</li>
+            <li>Bilgisayarı bırakırken kilitle (Win + L)</li>
+            <li>Şüpheli e-postayı IT'ye ilet, tıklama</li>
+            <li>Kişisel USB cihazı iş bilgisayarına takma</li>
+            <li>Onaylı yazılımlar dışında uygulama kurma</li>
+            <li>Sorun yaşadığında hemen ticket aç, bekleme</li>
+          </ul>
+          <div class="tip">Kısa ve düzenli eğitimler (ayda bir 5 dakikalık video) uzun yıllık eğitimlerden çok daha etkilidir. Microsoft Viva Learning bu konuda yardımcı olabilir.</div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- AZURE / BULUT BİLİŞİM -->
+    <div class="page" id="page-azure">
+      <div class="topic-hero"><div class="topic-icon">🌩️</div><div><h1>Azure / Bulut Bilişim</h1><p>Microsoft Azure'dan başlayarak bulut kavramlarını, sanal makine yönetimini ve hibrit altyapıyı öğrenin.</p><span class="level-badge">Başlangıç → Orta Seviye</span></div></div>
+
+      <div class="module open"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">01</div><div class="module-title">Bulut Bilişim Temelleri: IaaS, PaaS, SaaS</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Bulut Modelleri</h2>
+        <table>
+          <tr><th>Model</th><th>Siz Yönetirsiniz</th><th>Örnek</th></tr>
+          <tr><td><strong>IaaS</strong> (Altyapı)</td><td>İşletim sistemi, uygulama, veri</td><td>Azure VM, AWS EC2</td></tr>
+          <tr><td><strong>PaaS</strong> (Platform)</td><td>Uygulama ve veri</td><td>Azure App Service, Azure SQL</td></tr>
+          <tr><td><strong>SaaS</strong> (Yazılım)</td><td>Sadece veri ve kullanım</td><td>Microsoft 365, Salesforce</td></tr>
+        </table>
+        <h2 class="sec">Dağıtım Modelleri</h2>
+        <ul class="list">
+          <li><strong>Public Cloud:</strong> Microsoft/Amazon/Google'ın altyapısı — tam dışarıda</li>
+          <li><strong>Private Cloud:</strong> Şirketin kendi veri merkezinde — tam içeride</li>
+          <li><strong>Hybrid Cloud:</strong> İkisinin karışımı — en yaygın kurumsal model</li>
+        </ul>
+        <div class="tip">Buluta her şeyi taşımak zorunda değilsiniz. Kritik veriler yerinde, genel iş yükleri bulutta olabilir — buna hibrit mimari denir.</div>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">02</div><div class="module-title">Azure Portal ve Temel Kaynaklar</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Azure'da Temel Kavramlar</h2>
+        <ul class="list">
+          <li><strong>Subscription (Abonelik):</strong> Fatura birimi. Şirketin Azure harcamaları buraya bağlı.</li>
+          <li><strong>Resource Group:</strong> İlgili kaynakları mantıksal olarak gruplamak için. Örn: "Üretim-RG", "Test-RG"</li>
+          <li><strong>Region (Bölge):</strong> Kaynakların fiziksel konumu. Türkiye için genellikle "West Europe" veya "Germany West Central"</li>
+          <li><strong>Availability Zone:</strong> Aynı bölgedeki farklı veri merkezleri. Yüksek erişilebilirlik için kullanılır.</li>
+        </ul>
+        <h2 class="sec">Azure Virtual Machine Oluşturma</h2>
+        <pre><span class="comment"># Azure CLI ile VM oluşturma</span>
+<span class="cmd">az group create</span> --name UretimRG --location westeurope
+
+<span class="cmd">az vm create</span> \
+  --resource-group UretimRG \
+  --name WebSunucusu \
+  --image Win2022Datacenter \
+  --admin-username azureadmin \
+  --admin-password "Guclu@Parola2024" \
+  --size Standard_B2s</pre>
+        <div class="tip">Azure ücretsiz hesap ile 12 ay boyunca birçok hizmeti ücretsiz deneyebilirsiniz. portal.azure.com'dan başlayın.</div>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">03</div><div class="module-title">Azure Active Directory (Entra ID)</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Azure AD vs On-Premises AD</h2>
+        <div class="grid2">
+          <div class="mini-card"><h4>Şirket İçi AD</h4><p>Domain Controller sunucusu gerekir. LAN üzerinde çalışır. GPO ile yönetilir.</p></div>
+          <div class="mini-card"><h4>Azure AD (Entra ID)</h4><p>Microsoft'un bulut kimlik servisi. İnternet üzerinden. Conditional Access ile yönetilir.</p></div>
+        </div>
+        <h2 class="sec">Azure AD Connect</h2>
+        <p>Şirket içi Active Directory ile Azure AD'yi <strong>senkronize eder</strong>. Kullanıcılar hem şirket ağına hem de Microsoft 365'e aynı kimlik bilgileriyle giriş yapabilir.</p>
+        <ul class="list">
+          <li><strong>Password Hash Sync:</strong> En basit ve güvenli yöntem</li>
+          <li><strong>Pass-through Auth:</strong> Şifre doğrulama şirket içinde kalır</li>
+          <li><strong>Federation (ADFS):</strong> En karmaşık, büyük kurumlar için</li>
+        </ul>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">04</div><div class="module-title">Azure Güvenlik ve Maliyet Yönetimi</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Azure Güvenlik Araçları</h2>
+        <ul class="list">
+          <li><strong>Microsoft Defender for Cloud:</strong> VM'lerin güvenlik durumunu izler, önerir</li>
+          <li><strong>Azure Firewall:</strong> Ağ trafiği filtreleme</li>
+          <li><strong>Network Security Group (NSG):</strong> VM düzeyinde port kuralları</li>
+          <li><strong>Key Vault:</strong> Şifreler, sertifikalar ve anahtarları güvenli saklar</li>
+        </ul>
+        <h2 class="sec">Maliyet Kontrolü</h2>
+        <ul class="list">
+          <li><strong>Azure Cost Management:</strong> Harcamaları görüntüle, bütçe uyarısı kur</li>
+          <li><strong>Reserved Instances:</strong> 1-3 yıl taahhütle %40-72 tasarruf</li>
+          <li><strong>Auto-shutdown:</strong> Test VM'lerini mesai dışında otomatik kapat</li>
+          <li><strong>Rightsizing:</strong> Kullanılmayan büyük VM'leri küçük boyuta indir</li>
+        </ul>
+        <div class="warn">Azure'da kaynak bırakmak para yakar. Kullanılmayan VM, disk ve IP adreslerini mutlaka silin veya durdurun.</div>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">05</div><div class="module-title">Azure Temel Sertifikasyonu (AZ-900)</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">AZ-900: Microsoft Azure Fundamentals</h2>
+        <p>Azure'a yeni başlayanlar için en uygun sertifikasyon. Teknik ön koşul gerektirmez, kavramsal anlayış ölçülür.</p>
+        <h2 class="sec">Sınav Konuları</h2>
+        <ul class="list">
+          <li>Bulut kavramlarını anlama (%25)</li>
+          <li>Azure mimarisi ve hizmetleri (%35)</li>
+          <li>Azure yönetimi ve yönetişim (%30)</li>
+        </ul>
+        <div class="tip">Microsoft Learn (learn.microsoft.com) üzerinde AZ-900 öğrenme yolu tamamen ücretsiz. Yaklaşık 8-12 saatte tamamlanabilir.</div>
+      </div></div>
+    </div>
+
+    <!-- POWERSHELL OTOMASYON -->
+    <div class="page" id="page-powershell">
+      <div class="topic-hero"><div class="topic-icon">🤖</div><div><h1>PowerShell Otomasyon</h1><p>Tekrarlayan IT görevlerini otomatikleştirin. Script yazma, modül kullanımı ve zamanlanmış görevler.</p><span class="level-badge">Başlangıç → İleri Seviye</span></div></div>
+
+      <div class="module open"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">01</div><div class="module-title">PowerShell Temelleri</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Neden PowerShell?</h2>
+        <p>PowerShell ile yüzlerce kullanıcıya tek komutla işlem yapılır, raporlar otomatik üretilir, sistem bakımları zamanlanır. Manuel iş saatlere sürerken script dakikada bitirir.</p>
+        <h2 class="sec">Temel Sözdizimi</h2>
+        <pre><span class="comment"># Değişken tanımlama</span>
+<span class="cmd">$isim</span> = "Okan"
+<span class="cmd">$sayi</span> = 42
+<span class="cmd">$liste</span> = @("bir","iki","üç")
+
+<span class="comment"># Koşul</span>
+if ($sayi -gt 10) {
+    Write-Host "10'dan büyük"
+} else {
+    Write-Host "10 veya daha küçük"
+}
+
+<span class="comment"># Döngü</span>
+foreach ($eleman in $liste) {
+    Write-Host $eleman
+}
+
+<span class="comment"># Fonksiyon</span>
+function Merhaba($ad) {
+    Write-Host "Merhaba, $ad!"
+}
+Merhaba -ad "Okan"</pre>
+        <h2 class="sec">Karşılaştırma Operatörleri</h2>
+        <table>
+          <tr><th>Operatör</th><th>Anlamı</th></tr>
+          <tr><td><code>-eq</code></td><td>Eşit</td></tr>
+          <tr><td><code>-ne</code></td><td>Eşit değil</td></tr>
+          <tr><td><code>-gt / -lt</code></td><td>Büyüktür / Küçüktür</td></tr>
+          <tr><td><code>-like</code></td><td>Wildcard eşleşme (*)</td></tr>
+          <tr><td><code>-contains</code></td><td>Liste içinde barındırır</td></tr>
+        </table>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">02</div><div class="module-title">Pratik IT Scriptleri</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Toplu Kullanıcı Oluşturma (CSV'den)</h2>
+        <pre><span class="comment"># kullanicilar.csv: Ad,Soyad,Departman</span>
+<span class="cmd">Import-Csv</span> "kullanicilar.csv" | ForEach-Object {
+    $sam = ($_.Ad[0] + $_.Soyad).ToLower()
+    <span class="cmd">New-ADUser</span> -Name "$($_.Ad) $($_.Soyad)" `
+      -SamAccountName $sam `
+      -Department $_.Departman `
+      -Enabled $true `
+      -AccountPassword (ConvertTo-SecureString "Temp2024!" -AsPlainText -Force)
+    Write-Host "Oluşturuldu: $sam"
+}</pre>
+        <h2 class="sec">Disk Kullanım Raporu</h2>
+        <pre><span class="cmd">Get-PSDrive</span> -PSProvider FileSystem |
+  Select-Object Name,
+    @{N="Toplam(GB)";E={[math]::Round($_.Used/1GB+$_.Free/1GB,1)}},
+    @{N="Kullanılan(GB)";E={[math]::Round($_.Used/1GB,1)}},
+    @{N="Boş(GB)";E={[math]::Round($_.Free/1GB,1)}} |
+  <span class="cmd">Export-Csv</span> "disk_raporu.csv" -NoTypeInformation -Encoding UTF8</pre>
+        <h2 class="sec">90+ Gün Giriş Yapmayan Kullanıcılar</h2>
+        <pre>$tarih = (Get-Date).AddDays(-90)
+<span class="cmd">Get-ADUser</span> -Filter {LastLogonDate -lt $tarih -and Enabled -eq $true} `
+  -Properties LastLogonDate |
+  Select-Object Name, SamAccountName, LastLogonDate |
+  <span class="cmd">Export-Csv</span> "aktif_olmayan.csv" -NoTypeInformation</pre>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">03</div><div class="module-title">Hata Yönetimi ve Loglama</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Try-Catch ile Hata Yönetimi</h2>
+        <pre>try {
+    <span class="cmd">Stop-Service</span> -Name "Spooler" -ErrorAction Stop
+    Write-Host "Servis durduruldu."
+} catch {
+    Write-Host "Hata: $($_.Exception.Message)" -ForegroundColor Red
+} finally {
+    Write-Host "İşlem tamamlandı."
+}</pre>
+        <h2 class="sec">Log Dosyasına Yazma</h2>
+        <pre>function Log($mesaj) {
+    $zaman = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    "$zaman - $mesaj" | <span class="cmd">Add-Content</span> -Path "C:\Logs\it_log.txt"
+}
+
+Log "Script başladı"
+Log "Kullanıcılar güncellendi: 15 kişi"</pre>
+        <div class="tip">Scriptlerinizi her zaman test ortamında çalıştırın. <code>-WhatIf</code> parametresi birçok komutla ne yapacağını gösterir, gerçekte yapmaz.</div>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">04</div><div class="module-title">Zamanlanmış Görevler</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Task Scheduler ile Otomatik Çalıştırma</h2>
+        <pre><span class="comment"># Her gün 23:00'de script çalıştır</span>
+$tetikleyici = <span class="cmd">New-ScheduledTaskTrigger</span> -Daily -At "23:00"
+$eylem = <span class="cmd">New-ScheduledTaskAction</span> -Execute "PowerShell.exe" `
+  -Argument "-File C:\Scripts\yedekleme.ps1"
+
+<span class="cmd">Register-ScheduledTask</span> `
+  -TaskName "GunlukYedekleme" `
+  -Trigger $tetikleyici `
+  -Action $eylem `
+  -RunLevel Highest `
+  -User "SYSTEM"</pre>
+        <h2 class="sec">Otomasyon Fikirleri</h2>
+        <ul class="list">
+          <li>Her sabah disk doluluk raporu e-posta olarak gönder</li>
+          <li>Haftalık aktif olmayan kullanıcı raporu oluştur</li>
+          <li>Gece yarısı geçici dosyaları temizle</li>
+          <li>SLA ihlali yaklaşan ticketler için otomatik uyarı</li>
+        </ul>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">05</div><div class="module-title">Modüller ve PowerShell Gallery</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Hazır Modüller Kullanmak</h2>
+        <pre><span class="comment"># Modül ara ve kur</span>
+<span class="cmd">Find-Module</span> -Name "*Azure*"
+<span class="cmd">Install-Module</span> -Name Az -Scope CurrentUser
+
+<span class="comment"># Exchange Online modülü</span>
+<span class="cmd">Install-Module</span> -Name ExchangeOnlineManagement
+
+<span class="comment"># Active Directory modülü (zaten kurulu ise)</span>
+<span class="cmd">Import-Module</span> ActiveDirectory
+
+<span class="comment"># Kurulu modülleri listele</span>
+<span class="cmd">Get-Module</span> -ListAvailable</pre>
+        <div class="tip">PowerShell Gallery (powershellgallery.com) — binlerce hazır modül ve script barındırır. Tekerleği yeniden icat etmeyin, önce buraya bakın.</div>
+      </div></div>
+    </div>
+
+    <!-- SANALLASTIRMA -->
+    <div class="page" id="page-virtualization">
+      <div class="topic-hero"><div class="topic-icon">🖥️</div><div><h1>Sanallaştırma</h1><p>Hyper-V ve VMware ile sanal makine yönetimi, snapshot stratejileri ve kaynak optimizasyonu.</p><span class="level-badge">Başlangıç → Orta Seviye</span></div></div>
+
+      <div class="module open"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">01</div><div class="module-title">Sanallaştırma Nedir? Hipervisor Türleri</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Sanallaştırmanın Faydaları</h2>
+        <ul class="list">
+          <li>Tek fiziksel sunucuda birden fazla işletim sistemi çalıştırma</li>
+          <li>Donanım maliyetlerini ve enerji tüketimini azaltma</li>
+          <li>Hızlı yedekleme, klonlama ve geri yükleme (snapshot)</li>
+          <li>Test ortamı kurma ve silme kolaylığı</li>
+          <li>Yüksek erişilebilirlik ve yük devretme (failover)</li>
+        </ul>
+        <h2 class="sec">Hipervisor Türleri</h2>
+        <div class="grid2">
+          <div class="mini-card"><h4>Tip 1 — Bare Metal</h4><p>Doğrudan donanım üzerinde çalışır. Daha hızlı ve güvenli. Örn: Hyper-V, VMware ESXi, Proxmox</p></div>
+          <div class="mini-card"><h4>Tip 2 — Hosted</h4><p>İşletim sistemi üzerinde uygulama olarak çalışır. Örn: VirtualBox, VMware Workstation</p></div>
+        </div>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">02</div><div class="module-title">Hyper-V Yönetimi</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Hyper-V Kurulumu</h2>
+        <pre><span class="comment"># Windows Server'da Hyper-V rolünü kur</span>
+<span class="cmd">Install-WindowsFeature</span> -Name Hyper-V -IncludeManagementTools -Restart
+
+<span class="comment"># Yeni sanal makine oluştur</span>
+<span class="cmd">New-VM</span> -Name "TestSunucu" -MemoryStartupBytes 4GB `
+  -NewVHDPath "D:\VMs\TestSunucu.vhdx" -NewVHDSizeBytes 80GB `
+  -Generation 2 -SwitchName "Default Switch"
+
+<span class="comment"># VM'yi başlat</span>
+<span class="cmd">Start-VM</span> -Name "TestSunucu"</pre>
+        <h2 class="sec">Snapshot (Kontrol Noktası)</h2>
+        <pre><span class="comment"># Snapshot al — önemli değişikliklerden önce!</span>
+<span class="cmd">Checkpoint-VM</span> -Name "TestSunucu" -SnapshotName "Güncelleme Öncesi"
+
+<span class="comment"># Snapshot'a geri dön</span>
+<span class="cmd">Restore-VMCheckpoint</span> -VMName "TestSunucu" -Name "Güncelleme Öncesi"</pre>
+        <div class="warn">Snapshot'ları uzun süre bırakmayın. Disk alanı hızla tüketir ve performansı düşürür. Değişiklik onaylandıktan sonra silin.</div>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">03</div><div class="module-title">Kaynak Yönetimi ve En İyi Pratikler</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Kaynak Planlama</h2>
+        <table>
+          <tr><th>Kaynak</th><th>Öneri</th></tr>
+          <tr><td>CPU</td><td>Fiziksel çekirdek başına max 4-8 sanal çekirdek (overcommit)</td></tr>
+          <tr><td>RAM</td><td>Fiziksel RAM'in %80'inden fazlasını dağıtmayın</td></tr>
+          <tr><td>Disk</td><td>VM disklerini ayrı spindle/SSD'ye yerleştirin</td></tr>
+          <tr><td>Ağ</td><td>Kritik VM'lere ayrı NIC veya VLAN ayırın</td></tr>
+        </table>
+        <h2 class="sec">VM Şablonları (Template)</h2>
+        <p>Sık kullandığınız VM yapılandırmalarını şablon olarak saklayın. Yeni VM gerektiğinde şablondan klonlayın — kurulum süresi dakikalara iner.</p>
+        <div class="tip">Üretim ortamına benzer bir test/geliştirme ortamı kurun. Değişiklikler önce test VM'inde denenip onaylandıktan sonra üretime alınır.</div>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">04</div><div class="module-title">Yüksek Erişilebilirlik ve Yük Devretme</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Failover Clustering</h2>
+        <p>Birden fazla Hyper-V sunucusunu kümeleyerek bir sunucu çökerse VM'lerin otomatik olarak diğer sunucuya taşınmasını sağlayın.</p>
+        <ul class="list">
+          <li><strong>Live Migration:</strong> VM'i sıfır kesinti ile başka sunucuya taşı</li>
+          <li><strong>Quick Migration:</strong> Kısa kesinti ile taşı (daha hızlı)</li>
+          <li><strong>Storage Migration:</strong> VM diskini çalışırken başka depolamaya taşı</li>
+        </ul>
+        <h2 class="sec">Replica ile Felaket Kurtarma</h2>
+        <pre><span class="comment"># Hyper-V Replica — VM'i başka sunucuya sürekli kopyala</span>
+<span class="cmd">Enable-VMReplication</span> -VMName "UretimSunucu" `
+  -ReplicaServerName "DrSunucu" `
+  -ReplicaServerPort 80 `
+  -AuthenticationType Kerberos `
+  -ReplicationFrequencySec 300</pre>
+      </div></div>
+    </div>
+
+    <!-- MDM / INTUNE -->
+    <div class="page" id="page-mdm">
+      <div class="topic-hero"><div class="topic-icon">📱</div><div><h1>MDM / Microsoft Intune</h1><p>Mobil ve kurumsal cihazların merkezi yönetimi, politika dağıtımı ve uyumluluk takibi.</p><span class="level-badge">Başlangıç → Orta Seviye</span></div></div>
+
+      <div class="module open"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">01</div><div class="module-title">MDM Nedir? Intune'a Giriş</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">MDM (Mobile Device Management)</h2>
+        <p>MDM, şirkete ait veya çalışanların kişisel cihazlarını <strong>merkezi olarak yönetmenizi</strong> sağlar. Uygulama dağıtımı, şifreleme zorunluluğu, uzaktan silme gibi işlemleri tek konsoldan yaparsınız.</p>
+        <h2 class="sec">Microsoft Intune Neler Yapabilir?</h2>
+        <ul class="list">
+          <li>Windows, iOS, Android, macOS cihazları yönet</li>
+          <li>Şirket uygulamalarını otomatik kur ve güncelle</li>
+          <li>Cihaz kaybolursa uzaktan kilitle veya sil</li>
+          <li>PIN/şifre zorunluluğu uygula</li>
+          <li>Disk şifrelemesini (BitLocker) politikayla zorunlu kıl</li>
+          <li>Uyumsuz cihazların şirket kaynaklarına erişimini engelle</li>
+        </ul>
+        <div class="tip">Intune, Microsoft 365 Business Premium ve E3/E5 lisanslarına dahildir. Ayrıca satın almak gerekmeyebilir.</div>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">02</div><div class="module-title">Cihaz Kaydı ve Politika Dağıtımı</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Cihaz Kayıt Yöntemleri</h2>
+        <table>
+          <tr><th>Yöntem</th><th>Kullanım</th></tr>
+          <tr><td>Windows Autopilot</td><td>Yeni cihazlar — kutudan çıkar çıkmaz otomatik yapılandırma</td></tr>
+          <tr><td>Azure AD Join</td><td>Şirket Windows cihazları için önerilen yöntem</td></tr>
+          <tr><td>BYOD Enrollment</td><td>Kişisel cihazlar — sadece iş uygulamaları yönetilir</td></tr>
+          <tr><td>DEM (Bulk Enrollment)</td><td>Toplu cihaz kaydı</td></tr>
+        </table>
+        <h2 class="sec">Uyumluluk Politikası Örneği</h2>
+        <ul class="list">
+          <li>Minimum PIN uzunluğu: 6 karakter</li>
+          <li>Disk şifrelemesi (BitLocker): Zorunlu</li>
+          <li>Antivirüs: Etkin ve güncel olmalı</li>
+          <li>İşletim sistemi: Belirli sürümün üzerinde olmalı</li>
+          <li>Jailbreak/Root: Engellenmiş cihaz şirket ağına giremez</li>
+        </ul>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">03</div><div class="module-title">Uygulama Dağıtımı ve BYOD</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Intune ile Uygulama Dağıtımı</h2>
+        <ul class="list">
+          <li><strong>Microsoft Store uygulamaları:</strong> Doğrudan Intune'dan dağıt</li>
+          <li><strong>Win32 uygulamaları:</strong> .exe / .msi dosyalarını Intune paketi olarak yükle</li>
+          <li><strong>Line-of-Business (LOB):</strong> Şirkete özel uygulamalar</li>
+          <li><strong>Zorunlu / Kullanılabilir:</strong> Otomatik kur veya şirket portalından seç</li>
+        </ul>
+        <h2 class="sec">BYOD (Kişisel Cihaz) Yönetimi</h2>
+        <p>MAM (Mobile Application Management) ile cihazı tam yönetmeden sadece şirket uygulamalarını ve verilerini koruyabilirsiniz. Çalışanın kişisel fotoğraflarına dokunamazsınız.</p>
+        <div class="tip">BYOD politikanızda nelerin yönetileceğini çalışanlara açıkça belirtin. "Kişisel telefonumu kaydedeceğim ama IT ne görebilir?" sorusunu yanıtlayın.</div>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">04</div><div class="module-title">Windows Autopilot ile Sıfır Dokunuş Dağıtımı</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Autopilot Nasıl Çalışır?</h2>
+        <ol class="list">
+          <li>Yeni laptop satın alınır, seri numarası Intune'a kaydedilir</li>
+          <li>Kullanıcıya cihaz kutuda gönderilir</li>
+          <li>Kullanıcı cihazı açar ve şirket hesabıyla giriş yapar</li>
+          <li>Otomatik olarak domain'e katılır, uygulamalar yüklenir, ayarlar yapılır</li>
+          <li>IT'nin fiziksel müdahalesi gerekmez</li>
+        </ol>
+        <div class="tip">Autopilot ile IT ekibi cihaza hiç dokunmadan düzinelerce yeni çalışanı aynı anda hazır hale getirebilir. Büyük ölçeklerde muazzam zaman tasarrufu sağlar.</div>
+      </div></div>
+    </div>
+
+    <!-- VERİTABANI TEMELLERİ -->
+    <div class="page" id="page-database">
+      <div class="topic-hero"><div class="topic-icon">🗄️</div><div><h1>Veritabanı Temelleri</h1><p>SQL sorguları, SQL Server yönetimi, yedekleme ve temel DBA görevleri.</p><span class="level-badge">Başlangıç → Orta Seviye</span></div></div>
+
+      <div class="module open"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">01</div><div class="module-title">Veritabanı Kavramları ve SQL'e Giriş</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Temel Kavramlar</h2>
+        <ul class="list">
+          <li><strong>Veritabanı:</strong> İlişkili verilerin düzenli saklandığı yapı</li>
+          <li><strong>Tablo:</strong> Satır (kayıt) ve sütunlardan oluşan veri yapısı</li>
+          <li><strong>Primary Key:</strong> Her satırı benzersiz tanımlayan alan</li>
+          <li><strong>Foreign Key:</strong> Tablolar arası ilişki kuran alan</li>
+          <li><strong>Index:</strong> Sorgulama hızını artıran yapı</li>
+        </ul>
+        <h2 class="sec">Temel SQL Sorguları</h2>
+        <pre><span class="comment">-- Veri sorgulama</span>
+<span class="cmd">SELECT</span> Ad, Soyad, Departman <span class="cmd">FROM</span> Calisanlar
+<span class="cmd">WHERE</span> Departman = 'IT' <span class="cmd">ORDER BY</span> Ad;
+
+<span class="comment">-- Kayıt ekleme</span>
+<span class="cmd">INSERT INTO</span> Calisanlar (Ad, Soyad, Departman)
+<span class="cmd">VALUES</span> ('Okan', 'Keçeci', 'IT');
+
+<span class="comment">-- Kayıt güncelleme</span>
+<span class="cmd">UPDATE</span> Calisanlar <span class="cmd">SET</span> Departman = 'IT Yönetimi'
+<span class="cmd">WHERE</span> SamAccountName = 'okankececi';
+
+<span class="comment">-- Kayıt silme</span>
+<span class="cmd">DELETE FROM</span> Calisanlar <span class="cmd">WHERE</span> ID = 42;</pre>
+        <div class="danger">DELETE ve UPDATE sorgularını WHERE koşulsuz çalıştırmayın. Tüm tabloyu siler/günceller. Önce SELECT ile test edin.</div>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">02</div><div class="module-title">SQL Server Yönetimi</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">SQL Server Management Studio (SSMS)</h2>
+        <p>SSMS, SQL Server yönetimi için kullanılan ücretsiz grafik arayüzdür. Veritabanı oluşturma, sorgu çalıştırma, yedekleme ve izleme işlemleri buradan yapılır.</p>
+        <h2 class="sec">Günlük DBA Görevleri</h2>
+        <ul class="list">
+          <li>Yedeklerin başarıyla tamamlandığını doğrula</li>
+          <li>SQL Agent Job başarısızlıklarını kontrol et</li>
+          <li>Disk alanını izle (log dosyaları şişebilir)</li>
+          <li>Uzun süren sorguları (blocking) tespit et</li>
+          <li>İndeks bakımı (defragmentation) planla</li>
+        </ul>
+        <pre><span class="comment">-- Çalışan bağlantıları listele</span>
+<span class="cmd">SELECT</span> * <span class="cmd">FROM</span> sys.dm_exec_sessions
+<span class="cmd">WHERE</span> is_user_process = 1;
+
+<span class="comment">-- Veritabanı boyutlarını göster</span>
+<span class="cmd">EXEC</span> sp_spaceused;</pre>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">03</div><div class="module-title">Yedekleme ve Geri Yükleme</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">SQL Server Yedekleme Türleri</h2>
+        <table>
+          <tr><th>Tür</th><th>Ne Yedekler?</th><th>Sıklık</th></tr>
+          <tr><td>Full Backup</td><td>Tüm veritabanı</td><td>Günlük / Haftalık</td></tr>
+          <tr><td>Differential</td><td>Son full'dan bu yana değişenler</td><td>Günlük</td></tr>
+          <tr><td>Transaction Log</td><td>Log kayıtları (dakika bazlı kurtarma)</td><td>15 dakikada bir</td></tr>
+        </table>
+        <pre><span class="comment">-- Full yedekleme</span>
+<span class="cmd">BACKUP DATABASE</span> UretimDB
+<span class="cmd">TO DISK</span> = 'D:\Backup\UretimDB_Full.bak'
+<span class="cmd">WITH</span> COMPRESSION, CHECKSUM;
+
+<span class="comment">-- Geri yükleme</span>
+<span class="cmd">RESTORE DATABASE</span> UretimDB
+<span class="cmd">FROM DISK</span> = 'D:\Backup\UretimDB_Full.bak'
+<span class="cmd">WITH</span> REPLACE, RECOVERY;</pre>
+        <div class="tip">Yedeklerinizi düzenli olarak test edin. "Yedek alıyorum" değil, "yedeği geri yükleyebiliyorum" önemlidir.</div>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">04</div><div class="module-title">Performans ve Güvenlik</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Yavaş Sorgu Tespiti</h2>
+        <pre><span class="comment">-- En yavaş sorguları bul</span>
+<span class="cmd">SELECT TOP 10</span>
+  total_elapsed_time/execution_count <span class="cmd">AS</span> ort_sure,
+  execution_count,
+  SUBSTRING(text, 1, 100) <span class="cmd">AS</span> sorgu
+<span class="cmd">FROM</span> sys.dm_exec_query_stats
+<span class="cmd">CROSS APPLY</span> sys.dm_exec_sql_text(sql_handle)
+<span class="cmd">ORDER BY</span> ort_sure <span class="cmd">DESC</span>;</pre>
+        <h2 class="sec">SQL Server Güvenliği</h2>
+        <ul class="list">
+          <li>'sa' hesabını devre dışı bırakın, adlandırılmış yönetici hesabı kullanın</li>
+          <li>SQL Server'ı sadece gerekli portlardan erişilebilir yapın (1433)</li>
+          <li>Minimum yetki prensibini uygulayın (her uygulama ayrı login)</li>
+          <li>SQL Server Audit ile kritik sorguları loglayın</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <!-- LİNUX TEMELLERİ -->
+    <div class="page" id="page-linux">
+      <div class="topic-hero"><div class="topic-icon">🐧</div><div><h1>Linux Temelleri</h1><p>Terminal komutları, dosya sistemi, kullanıcı yönetimi ve servis yönetimini öğrenin.</p><span class="level-badge">Başlangıç → Orta Seviye</span></div></div>
+
+      <div class="module open"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">01</div><div class="module-title">Linux'a Giriş ve Temel Komutlar</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Neden Linux?</h2>
+        <p>Sunucuların büyük çoğunluğu Linux çalıştırır. Web sunucuları, veritabanları, bulut altyapısı — Linux olmadan modern IT altyapısı düşünülemez. Ücretsiz ve açık kaynaklıdır.</p>
+        <h2 class="sec">Temel Terminal Komutları</h2>
+        <pre><span class="cmd">ls -la</span>              <span class="comment"># Dosyaları listele (gizliler dahil)</span>
+<span class="cmd">cd /etc</span>             <span class="comment"># Dizin değiştir</span>
+<span class="cmd">pwd</span>                 <span class="comment"># Bulunduğun dizini göster</span>
+<span class="cmd">mkdir yeniklasör</span>    <span class="comment"># Klasör oluştur</span>
+<span class="cmd">cp kaynak hedef</span>     <span class="comment"># Dosya kopyala</span>
+<span class="cmd">mv eski yeni</span>        <span class="comment"># Taşı / yeniden adlandır</span>
+<span class="cmd">rm -rf klasör</span>       <span class="comment"># Sil (dikkatli kullan!)</span>
+<span class="cmd">cat dosya.txt</span>       <span class="comment"># Dosya içeriğini göster</span>
+<span class="cmd">grep "arama" dosya</span> <span class="comment"># Metin ara</span>
+<span class="cmd">find / -name "*.log"</span> <span class="comment"># Dosya ara</span>
+<span class="cmd">df -h</span>               <span class="comment"># Disk kullanımı</span>
+<span class="cmd">free -h</span>             <span class="comment"># RAM kullanımı</span>
+<span class="cmd">top</span>                 <span class="comment"># Çalışan işlemler</span></pre>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">02</div><div class="module-title">Dosya Sistemi ve İzinler</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Linux Dosya Sistemi Yapısı</h2>
+        <table>
+          <tr><th>Dizin</th><th>Ne İçerir?</th></tr>
+          <tr><td><code>/etc</code></td><td>Sistem konfigürasyon dosyaları</td></tr>
+          <tr><td><code>/var/log</code></td><td>Log dosyaları</td></tr>
+          <tr><td><code>/home</code></td><td>Kullanıcı ev dizinleri</td></tr>
+          <tr><td><code>/tmp</code></td><td>Geçici dosyalar</td></tr>
+          <tr><td><code>/usr/bin</code></td><td>Sistem komutları</td></tr>
+        </table>
+        <h2 class="sec">Dosya İzinleri</h2>
+        <pre><span class="comment"># İzin örneği: -rwxr-xr--</span>
+<span class="comment"># r=okuma(4), w=yazma(2), x=çalıştırma(1)</span>
+<span class="comment"># Sahip | Grup | Diğerleri</span>
+
+<span class="cmd">chmod 755 script.sh</span>   <span class="comment"># rwxr-xr-x</span>
+<span class="cmd">chmod 644 dosya.txt</span>   <span class="comment"># rw-r--r--</span>
+<span class="cmd">chown okan:IT dosya</span>   <span class="comment"># Sahip değiştir</span></pre>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">03</div><div class="module-title">Kullanıcı ve Grup Yönetimi</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <pre><span class="comment"># Kullanıcı oluştur</span>
+<span class="cmd">useradd</span> -m -s /bin/bash okankececi
+<span class="cmd">passwd</span> okankececi
+
+<span class="comment"># Gruba ekle</span>
+<span class="cmd">usermod</span> -aG sudo okankececi
+
+<span class="comment"># Kullanıcıları listele</span>
+<span class="cmd">cat</span> /etc/passwd
+
+<span class="comment"># Sudo yetkisi ver (sudoers)</span>
+<span class="cmd">visudo</span>
+<span class="comment"># Ekle: okankececi ALL=(ALL:ALL) ALL</span></pre>
+        <div class="warn">Root kullanıcısıyla doğrudan çalışmayın. Normal kullanıcıyla giriş yapın, gerektiğinde <code>sudo</code> kullanın.</div>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">04</div><div class="module-title">Servis Yönetimi ve Ağ</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <pre><span class="comment"># Systemd servis yönetimi</span>
+<span class="cmd">systemctl status nginx</span>      <span class="comment"># Servis durumu</span>
+<span class="cmd">systemctl start nginx</span>
+<span class="cmd">systemctl stop nginx</span>
+<span class="cmd">systemctl restart nginx</span>
+<span class="cmd">systemctl enable nginx</span>      <span class="comment"># Başlangıçta otomatik başlat</span>
+
+<span class="comment"># Logları izle (canlı)</span>
+<span class="cmd">journalctl -fu nginx</span>
+
+<span class="comment"># Ağ komutları</span>
+<span class="cmd">ip addr show</span>                <span class="comment"># IP adresleri</span>
+<span class="cmd">ss -tlnp</span>                    <span class="comment"># Açık portlar</span>
+<span class="cmd">ping -c 4 google.com</span>
+<span class="cmd">curl -I https://google.com</span>  <span class="comment"># HTTP başlıkları</span></pre>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">05</div><div class="module-title">Paket Yönetimi ve Güncelleme</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <pre><span class="comment"># Ubuntu / Debian (apt)</span>
+<span class="cmd">apt update</span>                  <span class="comment"># Paket listesini güncelle</span>
+<span class="cmd">apt upgrade</span>                 <span class="comment"># Tüm paketleri güncelle</span>
+<span class="cmd">apt install nginx</span>           <span class="comment"># Paket kur</span>
+<span class="cmd">apt remove nginx</span>            <span class="comment"># Paketi kaldır</span>
+
+<span class="comment"># RHEL / CentOS (dnf/yum)</span>
+<span class="cmd">dnf update</span>
+<span class="cmd">dnf install httpd</span></pre>
+        <div class="tip">Güvenlik yamalarını düzenli uygulayın: <code>apt update && apt upgrade -y</code> komutunu haftalık zamanlanmış görev olarak ayarlayabilirsiniz.</div>
+      </div></div>
+    </div>
+
+    <!-- E-POSTA GÜVENLİĞİ -->
+    <div class="page" id="page-emailsec">
+      <div class="topic-hero"><div class="topic-icon">📧</div><div><h1>E-posta Güvenliği</h1><p>SPF, DKIM, DMARC kayıtları, spam ve kimlik avı koruması ile güvenli e-posta altyapısı kurma.</p><span class="level-badge">Başlangıç → Orta Seviye</span></div></div>
+
+      <div class="module open"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">01</div><div class="module-title">E-posta Güvenliğinin Temelleri</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Neden E-posta Güvenliği Kritik?</h2>
+        <p>Siber saldırıların <strong>%91'i</strong> e-posta ile başlar. Phishing, iş e-postası dolandırıcılığı (BEC) ve malware dağıtımı için e-posta birincil araçtır.</p>
+        <h2 class="sec">Üç Temel Güvenlik Kaydı</h2>
+        <div class="grid2">
+          <div class="mini-card"><h4>SPF</h4><p>Hangi sunucuların sizin adınıza mail gönderebileceğini tanımlar.</p></div>
+          <div class="mini-card"><h4>DKIM</h4><p>E-postanın yolda değiştirilmediğini dijital imzayla doğrular.</p></div>
+          <div class="mini-card"><h4>DMARC</h4><p>SPF veya DKIM başarısız olursa ne yapılacağını belirler.</p></div>
+          <div class="mini-card"><h4>MX Kaydı</h4><p>Gelen e-postaların hangi sunucuya teslim edileceğini belirtir.</p></div>
+        </div>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">02</div><div class="module-title">SPF, DKIM ve DMARC Yapılandırması</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">SPF Kaydı (DNS TXT)</h2>
+        <pre><span class="comment"># Microsoft 365 için SPF kaydı</span>
+v=spf1 include:spf.protection.outlook.com -all
+
+<span class="comment"># Birden fazla mail sunucusu varsa</span>
+v=spf1 ip4:203.0.113.10 include:spf.protection.outlook.com -all
+
+<span class="comment"># ~all = soft fail (spam'e düşer)  -all = hard fail (reddedilir)</span></pre>
+        <h2 class="sec">DMARC Kaydı</h2>
+        <pre><span class="comment"># DNS'e _dmarc.sirket.com TXT kaydı ekle</span>
+v=DMARC1; p=quarantine; rua=mailto:dmarc@sirket.com; pct=100
+
+<span class="comment"># p=none → sadece raporla (başlangıç için)</span>
+<span class="comment"># p=quarantine → spam'e gönder</span>
+<span class="comment"># p=reject → tamamen reddet (en güvenli)</span></pre>
+        <div class="tip">Başlangıçta <code>p=none</code> ile başlayın, raporları izleyin, sorun yoksa <code>quarantine</code> sonra <code>reject</code>'e geçin.</div>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">03</div><div class="module-title">Microsoft Defender for Office 365</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Temel Koruma Özellikleri</h2>
+        <ul class="list">
+          <li><strong>Safe Links:</strong> E-postadaki linkleri gerçek zamanlı analiz eder, zararlıysa engeller</li>
+          <li><strong>Safe Attachments:</strong> Ekleri sanal ortamda açarak zararlı olup olmadığını test eder</li>
+          <li><strong>Anti-phishing:</strong> Kimliğe bürünme girişimlerini tespit eder</li>
+          <li><strong>Spoof Intelligence:</strong> Sahte gönderen adreslerini tespit eder</li>
+        </ul>
+        <h2 class="sec">Karantina Yönetimi</h2>
+        <p>Admin Center → Security → Threat management → Review → Quarantine yolundan karantinaya düşen mailleri görüntüleyin ve serbest bırakın. Kullanıcılar da kendi karantinalarını yönetebilir.</p>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">04</div><div class="module-title">E-posta Dolandırıcılığı (BEC) ve Önleme</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">BEC (Business Email Compromise) Nedir?</h2>
+        <p>Saldırgan, yönetici veya tedarikçi gibi davranarak çalışanı para transferi veya hassas bilgi paylaşımına ikna eder. Teknik değil, sosyal mühendislik tabanlıdır.</p>
+        <h2 class="sec">Önleme Yöntemleri</h2>
+        <ul class="list">
+          <li>Harici gönderenler için e-posta başlığına <strong>"HARICI"</strong> etiketi ekleyin</li>
+          <li>Para transferi taleplerini e-posta dışı kanaldan doğrulayın</li>
+          <li>CFO/CEO gibi hassas hesaplara ekstra MFA ve alert kurun</li>
+          <li>Düzenli BEC farkındalık eğitimi verin</li>
+        </ul>
+        <div class="danger">Üst yöneticiden "acil havale" maili gelirse mutlaka telefonla doğrulayın. E-postanın göründüğü gibi olmayabileceğini unutmayın.</div>
+      </div></div>
+    </div>
+
+    <!-- IT PROJE YÖNETİMİ -->
+    <div class="page" id="page-projectmgmt">
+      <div class="topic-hero"><div class="topic-icon">📋</div><div><h1>IT Proje Yönetimi</h1><p>Agile, Scrum ve klasik proje yönetimi metodolojileri ile IT projelerini planlama ve yürütme.</p><span class="level-badge">Başlangıç → Orta Seviye</span></div></div>
+
+      <div class="module open"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">01</div><div class="module-title">Proje Yönetimi Temelleri</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Proje Nedir?</h2>
+        <p>Proje; belirli bir başlangıç ve bitiş tarihi olan, benzersiz bir ürün veya hizmet ortaya koymayı hedefleyen geçici bir çalışmadır. Rutin operasyondan farkı: <strong>başlangıcı ve sonu vardır.</strong></p>
+        <h2 class="sec">Proje Kısıtları Üçgeni</h2>
+        <div class="grid2">
+          <div class="mini-card"><h4>⏰ Zaman</h4><p>Ne zaman teslim edilecek? Deadline nedir?</p></div>
+          <div class="mini-card"><h4>💰 Bütçe</h4><p>Ne kadar para harcanabilir?</p></div>
+          <div class="mini-card"><h4>📦 Kapsam</h4><p>Ne yapılacak? Ne yapılmayacak?</p></div>
+          <div class="mini-card"><h4>✅ Kalite</h4><p>Başarı kriterleri neler?</p></div>
+        </div>
+        <div class="warn">Üçten fazlasını aynı anda optimize edemezsiniz. "Hızlı, ucuz ve kaliteli" — ikisini seçin, üçüncüsü taviz verir.</div>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">02</div><div class="module-title">Agile ve Scrum</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Agile Nedir?</h2>
+        <p>Agile, projeyi küçük parçalara bölerek <strong>iteratif ve artımlı</strong> şekilde teslim etme yaklaşımıdır. Değişime esnektir.</p>
+        <h2 class="sec">Scrum Çerçevesi</h2>
+        <ul class="list">
+          <li><strong>Sprint:</strong> 2-4 haftalık çalışma döngüsü</li>
+          <li><strong>Product Backlog:</strong> Yapılacaklar listesi (öncelikli)</li>
+          <li><strong>Sprint Planning:</strong> Sprint'e alınacak işlerin seçilmesi</li>
+          <li><strong>Daily Standup:</strong> 15 dakika günlük toplantı — dün ne yaptım, bugün ne yapacağım, engelim ne?</li>
+          <li><strong>Sprint Review:</strong> Tamamlananları paydaşlara gösterme</li>
+          <li><strong>Retrospective:</strong> Neyi iyi yaptık, neyi iyileştirebiliriz?</li>
+        </ul>
+        <div class="tip">Scrum, yazılım dışında IT altyapı projelerinde de uygulanabilir. Haftalık sprint'lerle görev listesi yönetmek dahi büyük verimlilik sağlar.</div>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">03</div><div class="module-title">Risk Yönetimi</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Risk Matrisi</h2>
+        <table>
+          <tr><th>Olasılık \ Etki</th><th>Düşük</th><th>Orta</th><th>Yüksek</th></tr>
+          <tr><td><strong>Yüksek</strong></td><td style="color:var(--yellow)">İzle</td><td style="color:var(--red)">Önlem Al</td><td style="color:var(--red)">Kritik</td></tr>
+          <tr><td><strong>Orta</strong></td><td style="color:var(--green)">Kabul Et</td><td style="color:var(--yellow)">İzle</td><td style="color:var(--red)">Önlem Al</td></tr>
+          <tr><td><strong>Düşük</strong></td><td style="color:var(--green)">Kabul Et</td><td style="color:var(--green)">Kabul Et</td><td style="color:var(--yellow)">İzle</td></tr>
+        </table>
+        <h2 class="sec">Risk Yanıt Stratejileri</h2>
+        <ul class="list">
+          <li><strong>Kaçınma:</strong> Riski ortadan kaldıracak kapsam değişikliği yap</li>
+          <li><strong>Azaltma:</strong> Olasılığı veya etkiyi düşür</li>
+          <li><strong>Transfer:</strong> Sigortala veya alt yükleniciye devret</li>
+          <li><strong>Kabul:</strong> Riski bilinçli olarak kabul et, plan yap</li>
+        </ul>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">04</div><div class="module-title">Proje Araçları</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Yaygın Proje Yönetim Araçları</h2>
+        <table>
+          <tr><th>Araç</th><th>En İyi Olduğu</th><th>Ücret</th></tr>
+          <tr><td><strong>Microsoft Planner</strong></td><td>M365 entegrasyonu, basit görev yönetimi</td><td>M365 dahil</td></tr>
+          <tr><td><strong>Azure DevOps</strong></td><td>IT/yazılım projeleri, CI/CD</td><td>Ücretsiz (küçük)</td></tr>
+          <tr><td><strong>Jira</strong></td><td>Agile/Scrum, yazılım geliştirme</td><td>Freemium</td></tr>
+          <tr><td><strong>Trello</strong></td><td>Görsel kanban, küçük takımlar</td><td>Freemium</td></tr>
+          <tr><td><strong>Monday.com</strong></td><td>Genel proje yönetimi</td><td>Ücretli</td></tr>
+        </table>
+      </div></div>
+    </div>
+
+    <!-- BÜTÇE & VARLIK YÖNETİMİ -->
+    <div class="page" id="page-budget">
+      <div class="topic-hero"><div class="topic-icon">💼</div><div><h1>Bütçe & Varlık Yönetimi</h1><p>IT envanteri, lisans takibi, TCO hesabı ve IT maliyetlerini optimize etme stratejileri.</p><span class="level-badge">Orta Seviye</span></div></div>
+
+      <div class="module open"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">01</div><div class="module-title">IT Varlık Yönetimi (ITAM)</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">ITAM Nedir?</h2>
+        <p>ITAM (IT Asset Management), şirketteki tüm IT varlıklarını (donanım, yazılım, lisans) <strong>yaşam döngüsü boyunca takip etme</strong> sürecidir.</p>
+        <h2 class="sec">Donanım Envanteri</h2>
+        <ul class="list">
+          <li>Her cihaz için: Seri numarası, model, alım tarihi, garanti bitiş, atanan kullanıcı</li>
+          <li>Varlık etiketi (barkod/QR) ile fiziksel takip</li>
+          <li>Yıllık fiziksel sayım yapın</li>
+          <li>EOL (End of Life) yaklaşan cihazlar için bütçe planı yapın</li>
+        </ul>
+        <h2 class="sec">Yazılım Lisans Takibi</h2>
+        <ul class="list">
+          <li>Kaç lisans satın alındı vs. kaç kurulum var?</li>
+          <li>Lisans sözleşmeleri nerede saklı? Yenileme tarihleri?</li>
+          <li>Kullanılmayan yazılım lisanslarını iptal edin</li>
+        </ul>
+        <div class="warn">Lisans uyumsuzluğu (daha fazla kurulum yapma) yasal risk ve yüksek ceza doğurabilir. Microsoft, Adobe gibi şirketler denetim yapabilir.</div>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">02</div><div class="module-title">TCO ve IT Bütçe Planlaması</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">TCO (Toplam Sahip Olma Maliyeti)</h2>
+        <p>Bir IT yatırımının sadece satın alma fiyatı değil, <strong>yaşam döngüsü boyunca toplam maliyetidir</strong>.</p>
+        <table>
+          <tr><th>Maliyet Kalemi</th><th>Örnek</th></tr>
+          <tr><td>Satın alma</td><td>Laptop fiyatı: 30.000 TL</td></tr>
+          <tr><td>Kurulum/yapılandırma</td><td>IT işgücü: 2 saat</td></tr>
+          <tr><td>Eğitim</td><td>Kullanıcı eğitimi</td></tr>
+          <tr><td>Bakım/destek</td><td>Yıllık garanti/destek sözleşmesi</td></tr>
+          <tr><td>İmha/yenileme</td><td>5 yıl sonra değiştirme maliyeti</td></tr>
+        </table>
+        <h2 class="sec">Capex vs Opex</h2>
+        <div class="grid2">
+          <div class="mini-card"><h4>Capex (Sermaye)</h4><p>Sunucu satın alma, donanım yatırımı. Bir kez büyük ödeme.</p></div>
+          <div class="mini-card"><h4>Opex (Operasyonel)</h4><p>Bulut aboneliği, SaaS lisansı. Aylık/yıllık düzenli ödeme.</p></div>
+        </div>
+        <div class="tip">Buluta geçiş Capex'i Opex'e dönüştürür. Mali yönetim açısından avantajlı olabilir — büyük başlangıç yatırımı gerekmez.</div>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">03</div><div class="module-title">Maliyet Optimizasyonu Stratejileri</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Hemen Uygulanabilir Tasarruflar</h2>
+        <ul class="list">
+          <li>Kullanılmayan M365 lisanslarını kaldırın (ayrılanlar, değişen roller)</li>
+          <li>Bulutta kapatılmamış test ortamlarını silin</li>
+          <li>Yazıcı sayısını azaltın, ortak yazıcıya geçin</li>
+          <li>Güvenlik yazılımları için kurumsal lisans (hacim indirim) alın</li>
+          <li>Garanti süresi dolan ekipmanı mümkünse yenileme yerine yedek parça ile idare edin</li>
+        </ul>
+        <h2 class="sec">Orta Vadeli Stratejiler</h2>
+        <ul class="list">
+          <li>Sanallaştırma ile fiziksel sunucu sayısını azaltın</li>
+          <li>Bulut altyapısında Reserved Instance kullanın</li>
+          <li>Tek tedarikçiye bağımlılığı azaltın — rekabetçi fiyat alın</li>
+        </ul>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">04</div><div class="module-title">IT Tedarik ve Satıcı Yönetimi</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Tedarikçi Değerlendirme Kriterleri</h2>
+        <ul class="list">
+          <li>Fiyat ve ödeme koşulları</li>
+          <li>Destek kalitesi ve yanıt süresi (SLA)</li>
+          <li>Referanslar ve pazar deneyimi</li>
+          <li>Finansal istikrar (uzun vadeli iş birliği için)</li>
+          <li>Ürün yol haritası ve gelecek desteği</li>
+        </ul>
+        <h2 class="sec">Sözleşmede Dikkat Edilecekler</h2>
+        <ul class="list">
+          <li>SLA ve ceza maddeleri net mi?</li>
+          <li>Veri sahipliği ve gizlilik maddeleri var mı?</li>
+          <li>Fesih koşulları neler?</li>
+          <li>Fiyat artış sınırı var mı?</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <!-- BCP / DR -->
+    <div class="page" id="page-bcpdr">
+      <div class="topic-hero"><div class="topic-icon">🔄</div><div><h1>BCP / Felaket Kurtarma</h1><p>İş sürekliliği planı, felaket kurtarma stratejileri, RTO/RPO hedefleri ve kriz yönetimi.</p><span class="level-badge">Orta → İleri Seviye</span></div></div>
+
+      <div class="module open"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">01</div><div class="module-title">BCP ve DR Nedir?</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Tanımlar</h2>
+        <div class="grid2">
+          <div class="mini-card"><h4>BCP (İş Sürekliliği Planı)</h4><p>Felaket sırasında ve sonrasında iş fonksiyonlarının nasıl süreceğini tanımlar. İnsanlar, süreçler, teknoloji.</p></div>
+          <div class="mini-card"><h4>DR (Felaket Kurtarma)</h4><p>IT sistemlerinin felaket sonrasında nasıl restore edileceğini tanımlar. BCP'nin IT alt kümesi.</p></div>
+        </div>
+        <h2 class="sec">Felaket Türleri</h2>
+        <ul class="list">
+          <li>Doğal afet (deprem, sel, yangın)</li>
+          <li>Siber saldırı (ransomware, DDoS)</li>
+          <li>İnsan hatası (yanlış silme, yanlış yapılandırma)</li>
+          <li>Donanım arızası (sunucu, disk, ağ)</li>
+          <li>Elektrik/internet kesintisi</li>
+          <li>Tedarikçi/bulut sağlayıcı kesintisi</li>
+        </ul>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">02</div><div class="module-title">RTO, RPO ve Kurtarma Stratejileri</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Kritik Metrikler</h2>
+        <div class="grid2">
+          <div class="mini-card"><h4>RTO (Recovery Time Objective)</h4><p>Sistem ne kadar sürede ayağa kaldırılmalı? Örn: "Üretim sistemi max 4 saatte restore edilmeli"</p></div>
+          <div class="mini-card"><h4>RPO (Recovery Point Objective)</h4><p>En fazla ne kadar veri kaybedilebilir? Örn: "Max 1 saatlik veri kaybı kabul edilebilir"</p></div>
+        </div>
+        <h2 class="sec">Kurtarma Stratejileri (Maliyete Göre)</h2>
+        <table>
+          <tr><th>Strateji</th><th>RTO</th><th>RPO</th><th>Maliyet</th></tr>
+          <tr><td>Backup & Restore</td><td>Saatler-Günler</td><td>Saatler</td><td>Düşük</td></tr>
+          <tr><td>Warm Standby</td><td>Dakikalar</td><td>Dakikalar</td><td>Orta</td></tr>
+          <tr><td>Hot Standby / Active-Active</td><td>Saniyeler</td><td>Sıfır</td><td>Yüksek</td></tr>
+        </table>
+        <div class="tip">RTO ve RPO hedeflerini iş birimiyle birlikte belirleyin. IT tek başına karar vermemeli. "Ne kadar kesinti iş açısından kabul edilebilir?" sorusu iş birimin cevaplar.</div>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">03</div><div class="module-title">DR Planı Yazma ve Test Etme</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">DR Planı Bileşenleri</h2>
+        <ul class="list">
+          <li><strong>Kritik sistemler listesi:</strong> Hangi sistemler önce restore edilecek?</li>
+          <li><strong>İletişim planı:</strong> Felaket durumunda kim kimi arar? Alternatif iletişim kanalı?</li>
+          <li><strong>Rol ve sorumluluklar:</strong> Kim ne yapar?</li>
+          <li><strong>Kurtarma prosedürleri:</strong> Adım adım sistem restore talimatları</li>
+          <li><strong>Tedarikçi iletişim listesi:</strong> Acil durumda aranacak numaralar</li>
+          <li><strong>Test takvimi:</strong> Planın ne sıklıkla test edileceği</li>
+        </ul>
+        <h2 class="sec">DR Testi Türleri</h2>
+        <ul class="list">
+          <li><strong>Masaüstü Egzersizi:</strong> Senaryo üzerinden teorik pratik</li>
+          <li><strong>Tam Kesinti Testi:</strong> Gerçekten üretimi kapatıp kurtarma</li>
+          <li><strong>Paralel Test:</strong> DR ortamını üretime paralel çalıştır</li>
+        </ul>
+        <div class="danger">Test edilmemiş DR planı, planı olmamaktan daha tehlikeli olabilir. Gerçek felakette plan yanlış olduğunu görürsünüz — o zaman çok geç.</div>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">04</div><div class="module-title">Bulut ile Felaket Kurtarma</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Azure Site Recovery (ASR)</h2>
+        <p>Şirket içi VM'leri ve fiziksel sunucuları Azure'a sürekli replike eder. Felaket anında saniyeler içinde Azure'da ayağa kaldırılabilir.</p>
+        <ul class="list">
+          <li>Failover: Üretim sistemini Azure'a taşı</li>
+          <li>Failback: Sorun giderildikten sonra şirket içine geri al</li>
+          <li>Replication: Sürekli değişiklikler Azure'a gönderilir (RPO: dakikalar)</li>
+        </ul>
+        <div class="tip">DRaaS (DR as a Service) ile büyük altyapı yatırımı olmadan uygun maliyetli felaket kurtarma mümkün. Küçük/orta şirketler için idealdir.</div>
+      </div></div>
+    </div>
+
+    <!-- KVKK / ISO 27001 -->
+    <div class="page" id="page-compliance">
+      <div class="topic-hero"><div class="topic-icon">📜</div><div><h1>KVKK / ISO 27001</h1><p>Kişisel verilerin korunması, bilgi güvenliği yönetim sistemi ve uyumluluk gereklilikleri.</p><span class="level-badge">Orta → İleri Seviye</span></div></div>
+
+      <div class="module open"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">01</div><div class="module-title">KVKK — Kişisel Verilerin Korunması Kanunu</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">KVKK Nedir?</h2>
+        <p>6698 sayılı KVKK, Türkiye'de kişisel verilerin işlenmesini düzenleyen kanundur. AB'nin GDPR'ına benzer. IT olarak verilerin nasıl toplandığı, işlendiği ve korunduğundan sorumlusunuz.</p>
+        <h2 class="sec">Temel Kavramlar</h2>
+        <ul class="list">
+          <li><strong>Kişisel Veri:</strong> Kimliği belirli/belirlenebilir gerçek kişiye ilişkin her türlü bilgi (isim, TC, e-posta, IP adresi, fotoğraf)</li>
+          <li><strong>Özel Nitelikli Veri:</strong> Sağlık, biyometri, din, siyasi görüş — ekstra koruma gerekir</li>
+          <li><strong>Veri Sorumlusu:</strong> Verinin işlenme amacını belirleyen şirket/kişi</li>
+          <li><strong>Açık Rıza:</strong> Kişinin verilerinin işlenmesine onay vermesi</li>
+        </ul>
+        <h2 class="sec">IT'nin KVKK Sorumlulukları</h2>
+        <ul class="list">
+          <li>Veri envanteri oluşturma (hangi veri, nerede, kim erişiyor?)</li>
+          <li>Teknik güvenlik önlemleri (şifreleme, erişim kontrolü, log)</li>
+          <li>Veri ihlali durumunda 72 saat içinde KVK Kurumu'na bildirim</li>
+          <li>Veri silme prosedürleri (ayrılan çalışan, süresi dolan veri)</li>
+        </ul>
+        <div class="danger">KVKK ihlali durumunda 1 milyon TL'ye kadar idari para cezası uygulanabilir. Bazı durumlarda cezai sorumluluk da doğabilir.</div>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">02</div><div class="module-title">ISO 27001 — Bilgi Güvenliği Yönetim Sistemi</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">ISO 27001 Nedir?</h2>
+        <p>Bilgi güvenliği yönetim sistemi (BGYS) için uluslararası standarttır. Şirketin bilgi varlıklarını korumak için sistematik bir yaklaşım sunar.</p>
+        <h2 class="sec">Temel Prensipler (CIA Üçgeni)</h2>
+        <div class="grid2">
+          <div class="mini-card"><h4>Confidentiality (Gizlilik)</h4><p>Bilgiye sadece yetkililerin erişmesi</p></div>
+          <div class="mini-card"><h4>Integrity (Bütünlük)</h4><p>Bilginin doğruluğu ve tamlığının korunması</p></div>
+          <div class="mini-card"><h4>Availability (Erişilebilirlik)</h4><p>Bilginin yetkililere her zaman erişilebilir olması</p></div>
+          <div class="mini-card"><h4>Sertifikasyon</h4><p>Akredite bağımsız kuruluş tarafından denetleme ve sertifika</p></div>
+        </div>
+        <h2 class="sec">ISO 27001 Uygulama Adımları</h2>
+        <ol class="list">
+          <li>Kapsam tanımlama</li>
+          <li>Risk değerlendirmesi</li>
+          <li>Risk işleme planı</li>
+          <li>Kontrollerin uygulanması (Ek A — 93 kontrol)</li>
+          <li>İç denetim</li>
+          <li>Yönetim gözden geçirmesi</li>
+          <li>Bağımsız denetim ve sertifikasyon</li>
+        </ol>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">03</div><div class="module-title">Veri Sınıflandırma ve Saklama</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Veri Sınıflandırma Seviyeleri</h2>
+        <table>
+          <tr><th>Seviye</th><th>Tanım</th><th>Örnek</th></tr>
+          <tr><td style="color:var(--red)"><strong>Gizli</strong></td><td>Sızarsa ciddi zarar</td><td>Müşteri ödeme bilgisi, sözleşmeler</td></tr>
+          <tr><td style="color:var(--yellow)"><strong>Dahili</strong></td><td>Sadece çalışanlara açık</td><td>İç prosedürler, maaş bilgisi</td></tr>
+          <tr><td style="color:var(--neon)"><strong>Kısıtlı</strong></td><td>Belirli gruplar erişebilir</td><td>Proje belgeleri</td></tr>
+          <tr><td style="color:var(--green)"><strong>Kamuya Açık</strong></td><td>Herkese açık</td><td>Web sitesi, basın bültenleri</td></tr>
+        </table>
+        <h2 class="sec">Veri Saklama ve İmha</h2>
+        <ul class="list">
+          <li>Her veri kategorisi için saklama süresi belirleyin</li>
+          <li>Süre dolduktan sonra güvenli imha edin (disk degauss/shred)</li>
+          <li>İmha sürecini belgeleyin</li>
+        </ul>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">04</div><div class="module-title">Güvenlik Politikaları ve Denetim</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Temel Güvenlik Politikaları</h2>
+        <ul class="list">
+          <li><strong>Kabul Edilebilir Kullanım Politikası:</strong> Şirket cihazları ve ağı nasıl kullanılır?</li>
+          <li><strong>Uzaktan Çalışma Politikası:</strong> Evden çalışmanın güvenlik gereksinimleri</li>
+          <li><strong>Şifre Politikası:</strong> Minimum uzunluk, karmaşıklık, MFA</li>
+          <li><strong>Veri İhlali Yanıt Planı:</strong> İhlal durumunda adımlar</li>
+          <li><strong>BYOD Politikası:</strong> Kişisel cihaz kullanım kuralları</li>
+        </ul>
+        <div class="tip">Politikalar yazılıp rafta bırakılmamalı. Yılda en az bir kez gözden geçirin, çalışanlara imzalatın ve uyumu denetleyin.</div>
+      </div></div>
+    </div>
+
+    <!-- GÜNEŞ ENERJİSİ & IT -->
+    <div class="page" id="page-solar">
+      <div class="topic-hero"><div class="topic-icon">☀️</div><div><h1>Güneş Enerjisi Sektöründe IT</h1><p>SCADA sistemleri, IoT izleme, saha destek ve yenilenebilir enerji sektörüne özgü IT altyapısı.</p><span class="level-badge">Sektöre Özel</span></div></div>
+
+      <div class="module open"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">01</div><div class="module-title">Güneş Enerjisi Sektöründe IT'nin Rolü</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">Sektörün IT İhtiyaçları</h2>
+        <p>Güneş enerjisi şirketleri hem ofis IT altyapısı hem de <strong>saha üretim sistemlerinin</strong> yönetimini gerektiren çift katmanlı bir IT yapısına sahiptir.</p>
+        <div class="grid2">
+          <div class="mini-card"><h4>Ofis IT</h4><p>Standart kurumsal IT: AD, M365, yardım masası, ağ, güvenlik</p></div>
+          <div class="mini-card"><h4>Operasyonel IT (OT)</h4><p>SCADA, inverter yönetimi, IoT sensörler, üretim izleme</p></div>
+          <div class="mini-card"><h4>Saha IT</h4><p>GES (güneş enerji santrali) uzaktan erişim, saha bilgisayarları, 4G/fiber bağlantı</p></div>
+          <div class="mini-card"><h4>Veri Analitiği</h4><p>Üretim verisi toplama, performans analizi, arıza tahmini</p></div>
+        </div>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">02</div><div class="module-title">SCADA Sistemleri</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">SCADA Nedir?</h2>
+        <p>SCADA (Supervisory Control and Data Acquisition), saha ekipmanlarını <strong>uzaktan izleme ve kontrol etme</strong> sistemidir. GES'lerde panel gruplarını, inverterleri, trafoları ve şebeke bağlantısını izlemek için kullanılır.</p>
+        <h2 class="sec">SCADA Bileşenleri</h2>
+        <ul class="list">
+          <li><strong>RTU/PLC:</strong> Sahada fiziksel sinyal toplayan cihazlar</li>
+          <li><strong>İletişim:</strong> Modbus, DNP3, IEC 61850 protokolleri; Fiber, 4G, uydu</li>
+          <li><strong>SCADA Sunucusu:</strong> Gelen verileri toplar, işler, depolar</li>
+          <li><strong>HMI (İnsan-Makine Arayüzü):</strong> Operatörlerin sistemi izlediği ekran</li>
+          <li><strong>Tarihsel Veri Tabanı:</strong> Üretim verilerinin uzun vadeli saklanması</li>
+        </ul>
+        <div class="warn">SCADA sistemleri internete doğrudan bağlı olmamalıdır. Ofis ağı ile OT ağı arasında güvenlik duvarı (DMZ) bulundurulmalıdır.</div>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">03</div><div class="module-title">IoT ve Uzaktan İzleme</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">GES'te IoT Kullanımı</h2>
+        <ul class="list">
+          <li><strong>Hava istasyonları:</strong> Irradiance (güneş ışınımı), sıcaklık, rüzgar hızı sensörleri</li>
+          <li><strong>Panel sıcaklık sensörleri:</strong> Aşırı ısınma tespiti</li>
+          <li><strong>Akım/gerilim ölçüm:</strong> Her string (panel grubu) ayrı izlenir</li>
+          <li><strong>Termal kameralar:</strong> Drone ile panel sağlık denetimi</li>
+        </ul>
+        <h2 class="sec">Uzaktan İzleme Platformları</h2>
+        <ul class="list">
+          <li><strong>SolarEdge, SMA Sunny Portal, Fronius Solar.web:</strong> İnverter üreticilerine özgü platformlar</li>
+          <li><strong>Solaranywhere, PVsyst:</strong> Üretim tahmini ve performans analizi</li>
+          <li><strong>Özel SCADA çözümleri:</strong> Çok santralli büyük portföyler için</li>
+        </ul>
+        <div class="tip">Bağlantı kesintisi yaşayan sahalarda lokal veri tampon depolama önemlidir. Bağlantı düzelince veriler otomatik sync edilmelidir.</div>
+      </div></div>
+
+      <div class="module"><div class="module-header" onclick="toggleModule(this)"><div class="module-num">04</div><div class="module-title">OT Güvenliği ve Saha Destek</div><div class="module-arrow">▶</div></div>
+      <div class="module-body">
+        <h2 class="sec">OT/IT Güvenlik Farkı</h2>
+        <table>
+          <tr><th></th><th>IT Güvenliği</th><th>OT Güvenliği</th></tr>
+          <tr><td>Öncelik</td><td>Gizlilik, bütünlük</td><td>Erişilebilirlik, güvenlik</td></tr>
+          <tr><td>Güncelleme</td><td>Hızlı patch</td><td>Uzun test + bakım penceresi</td></tr>
+          <tr><td>Kesinti</td><td>Kabul edilebilir</td><td>Üretim durur — çok kritik</td></tr>
+        </table>
+        <h2 class="sec">Saha IT Desteği</h2>
+        <ul class="list">
+          <li>Sahada genellikle endüstriyel PC ve panel bilgisayarlar kullanılır</li>
+          <li>Uzaktan erişim için güvenli VPN zorunludur (saha ağına doğrudan internet erişimi verilmez)</li>
+          <li>Saha ekipmanlarının envanter takibi kritiktir (hangi inverter hangi yazılım sürümünde?)</li>
+          <li>Bakım ekipleri için saha destek prosedürleri yazılı olmalıdır</li>
+        </ul>
+        <div class="tip">Güneş enerjisi sektöründeki IT uzmanı olmak avantajlıdır: hem standart IT hem OT bilgisi gerektirdiğinden uzman profili nadirdir ve değerlidir.</div>
+      </div></div>
+    </div>
+
+    <!-- GİRİŞ LOGLARI -->
+    <div class="page" id="page-logs">
+      <div class="topic-hero" style="background:linear-gradient(135deg,rgba(255,107,107,.08),var(--card));">
+        <div class="topic-icon">📋</div>
+        <div>
+          <h1>Giriş Logları</h1>
+          <p>Tüm başarılı girişler, hatalı denemeler ve çıkış kayıtları burada saklanır.</p>
+          <span class="level-badge" style="background:rgba(255,107,107,.1);color:#ff6b6b;border-color:rgba(255,107,107,.2);">Admin Bölümü</span>
+        </div>
+      </div>
+
+      <!-- İstatistikler -->
+      <div class="log-stats" id="log-stats"></div>
+
+      <!-- Araç çubuğu -->
+      <div class="log-toolbar">
+        <select class="log-filter" id="log-filter" onchange="renderLogs()">
+          <option value="hepsi">Tüm Kayıtlar</option>
+          <option value="başarılı">Başarılı Girişler</option>
+          <option value="hatalı">Hatalı Denemeler</option>
+          <option value="kilit">Kilit Olayları</option>
+          <option value="çıkış">Çıkış Kayıtları</option>
+        </select>
+        <button class="log-toolbar btn-export" onclick="exportLogs()">⬇️ CSV İndir</button>
+        <button class="log-toolbar btn-export" style="background:rgba(0,212,255,.1);color:var(--neon);border-color:rgba(0,212,255,.25);" onclick="exportLogsJSON()">⬇️ JSON İndir</button>
+        <button class="log-toolbar btn-clear" onclick="clearLogs()">🗑️ Logları Temizle</button>
+      </div>
+
+      <!-- Log tablosu -->
+      <div class="log-table-wrap">
+        <table class="log-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Zaman</th>
+              <th>Durum</th>
+              <th>Kullanıcı</th>
+              <th>IP Adresi</th>
+              <th>Detay</th>
+              <th>Platform</th>
+            </tr>
+          </thead>
+          <tbody id="log-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<!-- Log sayfası yönetici şifre modalı -->
+<div id="log-pass-modal">
+  <div class="log-pass-box">
+    <h3>🔐 Yönetici Doğrulama</h3>
+    <p class="lp-sub">Giriş Logları sayfasına erişmek için<br>yönetici şifrenizi giriniz.</p>
+    <div id="log-pass-err" class="log-pass-err">Hatalı şifre. Tekrar deneyin.</div>
+    <div class="login-field">
+      <label>Yönetici Şifresi</label>
+      <div class="pass-wrap">
+        <input type="password" id="log-pass-input" placeholder="••••••••••"
+               onkeydown="if(event.key==='Enter')checkLogPass()"
+               autocomplete="new-password"/>
+        <span class="pass-eye" onclick="
+          var i=document.getElementById('log-pass-input');
+          i.type=i.type==='password'?'text':'password';
+          this.textContent=i.type==='password'?'👁️':'🙈';
+        ">👁️</span>
+      </div>
+    </div>
+    <button class="login-btn" id="log-pass-btn" onclick="checkLogPass()">Doğrula</button>
+    <div style="text-align:center;margin-top:1rem;">
+      <span style="font-size:.75rem;color:var(--muted);cursor:pointer;font-family:'Courier New',monospace;"
+            onclick="closeLogPassModal()">← Geri Dön</span>
+    </div>
+  </div>
+</div>
+
+<script>
+const pages = {
+  home:'Ana Sayfa', windows:'Windows Server', network:'Ağ Yönetimi',
+  itsm:'ITSM', hardware:'Donanım Desteği', m365:'Microsoft 365',
+  security:'Siber Güvenlik', reporting:'Raporlama', users:'Kullanıcı İşlemleri',
+  azure:'Azure / Bulut Bilişim', powershell:'PowerShell Otomasyon',
+  virtualization:'Sanallaştırma', mdm:'MDM / Intune',
+  database:'Veritabanı Temelleri', linux:'Linux Temelleri',
+  emailsec:'E-posta Güvenliği', projectmgmt:'IT Proje Yönetimi',
+  budget:'Bütçe & Varlık Yönetimi', bcpdr:'BCP / Felaket Kurtarma',
+  compliance:'KVKK / ISO 27001', solar:'Güneş Enerjisi & IT',
+  logs:'📋 Giriş Logları'
+};
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>{
+    if(n.getAttribute('onclick').includes("'"+id+"'")) n.classList.add('active');
+  });
+  document.getElementById('topbar-title').textContent = pages[id];
+  document.getElementById('main').scrollTop = 0;
+}
+
+function toggleModule(header){
+  const mod = header.parentElement;
+  mod.classList.toggle('open');
+}
+
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+
+// Menü seçiminde sidebar kapat (mobilde)
+const origShowPage = showPage;
+window.showPage = function(id){
+  origShowPage(id);
+  if(window.innerWidth <= 768){
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('overlay').classList.remove('open');
+  }
+};
+
+// ── AUTH ──
+const CREDS = [
+  { user:'b2thbg==',     hash:'2ae59ae05001e9ca5fd5fdcb5970edc8f1339a6fe5c8d55437e352202ec46d18', salt:'OK_IT_2024', name:'okan' },
+  { user:'TWlzYWZpcg==', hash:'22590c1b820d4a5a3e9883c93bdd4e0c60d47132154e184195e09fe1706a4c1d', salt:'OK_IT_2024', name:'Misafir' }
+];
+let attempts = 0;
+const MAX_ATTEMPTS = 5;
+const LOCK_MS = 3 * 60 * 1000; // 3 dakika
+
+async function sha256(str){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+// ── LOG SİSTEMİ ──
+const LOG_KEY = 'it_rehberi_logs';
+const MAX_LOGS = 500;
+let _cachedIP = null;
+
+async function getPublicIP(){
+  if(_cachedIP) return _cachedIP;
+  try {
+    const r = await Promise.race([
+      fetch('https://api.ipify.org?format=json'),
+      new Promise((_,rej) => setTimeout(()=>rej('timeout'), 3000))
+    ]);
+    const d = await r.json();
+    _cachedIP = d.ip || 'Bilinmiyor';
+  } catch {
+    _cachedIP = 'Çevrimdışı';
+  }
+  return _cachedIP;
+}
+
+// Sayfa açılır açılmaz IP'yi arka planda çek
+getPublicIP();
+
+async function saveLog(entry){
+  const ip = await getPublicIP();
+  const logs = JSON.parse(localStorage.getItem(LOG_KEY)||'[]');
+  logs.unshift({
+    id: Date.now(),
+    zaman: new Date().toLocaleString('tr-TR'),
+    timestamp: Date.now(),
+    durum: entry.durum,
+    kullanici: entry.kullanici || '—',
+    detay: entry.detay || '',
+    ip: ip,
+    cihaz: navigator.userAgent.substring(0,80),
+    platform: /Mobi|Android/i.test(navigator.userAgent) ? '📱 Mobil' : '🖥️ Masaüstü'
+  });
+  if(logs.length > MAX_LOGS) logs.length = MAX_LOGS;
+  localStorage.setItem(LOG_KEY, JSON.stringify(logs));
+}
+
+async function doLogin(){
+  const user = document.getElementById('l-user').value.trim();
+  const pass = document.getElementById('l-pass').value;
+  const btn  = document.getElementById('login-btn');
+  const err  = document.getElementById('login-error');
+  const warn = document.getElementById('attempt-warn');
+
+  // Kilitli mi?
+  const lockUntil = +localStorage.getItem('lockUntil')||0;
+  if(Date.now() < lockUntil){
+    const kalan = Math.ceil((lockUntil - Date.now())/1000);
+    err.textContent = `Çok fazla hatalı deneme. ${kalan} saniye bekleyin.`;
+    err.classList.add('show');
+    saveLog({durum:'🔴 KİLİT', kullanici: user, detay:`Kilit süresi: ${kalan}s kaldı`});
+    return;
+  }
+
+  btn.disabled = true; btn.textContent = '⏳ Kontrol ediliyor...';
+
+  let matchedCred = null;
+  try {
+    const encodedUser = btoa(user);
+    for(const cred of CREDS){
+      if(encodedUser === cred.user){
+        const h = await sha256(pass + cred.salt);
+        if(h === cred.hash){ matchedCred = cred; break; }
+      }
+    }
+  } catch(e){}
+
+  btn.disabled = false; btn.textContent = '🔐 Giriş Yap';
+
+  if(matchedCred){
+    attempts = 0;
+    localStorage.removeItem('lockUntil');
+    sessionStorage.setItem('auth', '1');
+    sessionStorage.setItem('authUser', matchedCred.name);
+    document.getElementById('login-screen').classList.add('hidden');
+    document.getElementById('logout-btn').style.display = 'flex';
+    err.classList.remove('show');
+    warn.classList.remove('show');
+    saveLog({durum:'🟢 BAŞARILI GİRİŞ', kullanici: matchedCred.name, detay:'Oturum açıldı'});
+  } else {
+    attempts++;
+    const kalan = MAX_ATTEMPTS - attempts;
+    if(attempts >= MAX_ATTEMPTS){
+      localStorage.setItem('lockUntil', Date.now() + LOCK_MS);
+      attempts = 0;
+      err.textContent = 'Çok fazla hatalı deneme! 3 dakika beklemeniz gerekiyor.';
+      saveLog({durum:'🔴 HESAP KİLİTLENDİ', kullanici: user, detay:'5 yanlış deneme — 3 dk kilit'});
+    } else {
+      err.textContent = 'Kullanıcı adı veya şifre hatalı.';
+      if(kalan <= 2){
+        warn.textContent = `⚠️ Dikkat: ${kalan} deneme hakkınız kaldı.`;
+        warn.classList.add('show');
+      }
+      saveLog({durum:'🟡 HATALI GİRİŞ', kullanici: user, detay:`Kalan deneme: ${kalan}`});
+    }
+    err.classList.remove('show');
+    void err.offsetWidth;
+    err.classList.add('show');
+    document.getElementById('l-pass').value = '';
+    document.getElementById('l-pass').focus();
+  }
+}
+
+function doLogout(){
+  const loggedUser = sessionStorage.getItem('authUser') || 'kullanıcı';
+  saveLog({durum:'🔵 ÇIKIŞ', kullanici: loggedUser, detay:'Oturum kapatıldı'});
+  sessionStorage.removeItem('auth');
+  sessionStorage.removeItem('authUser');
+  sessionStorage.removeItem('logAuth');
+  document.getElementById('login-screen').classList.remove('hidden');
+  document.getElementById('logout-btn').style.display = 'none';
+  document.getElementById('l-pass').value = '';
+  document.getElementById('l-user').value = '';
+  document.getElementById('l-user').focus();
+}
+
+function toggleEye(){
+  const p = document.getElementById('l-pass');
+  const e = document.getElementById('eye-toggle');
+  if(p.type==='password'){p.type='text'; e.textContent='🙈';}
+  else{p.type='password'; e.textContent='👁';}
+}
+
+// ── LOG RENDER ──
+function getLogs(){
+  return JSON.parse(localStorage.getItem(LOG_KEY)||'[]');
+}
+
+function renderLogs(){
+  const filter = document.getElementById('log-filter')?.value || 'hepsi';
+  let logs = getLogs();
+
+  // İstatistik
+  const total   = logs.length;
+  const basarili= logs.filter(l=>l.durum.includes('BAŞARILI')).length;
+  const hatali  = logs.filter(l=>l.durum.includes('HATALI')).length;
+  const kilit   = logs.filter(l=>l.durum.includes('KİLİT')).length;
+  const cikis   = logs.filter(l=>l.durum.includes('ÇIKIŞ')).length;
+
+  const statsEl = document.getElementById('log-stats');
+  if(statsEl) statsEl.innerHTML = `
+    <div class="log-stat"><div class="ls-num" style="color:var(--neon)">${total}</div><div class="ls-label">Toplam Kayıt</div></div>
+    <div class="log-stat"><div class="ls-num" style="color:var(--green)">${basarili}</div><div class="ls-label">Başarılı Giriş</div></div>
+    <div class="log-stat"><div class="ls-num" style="color:#ff6b6b">${hatali}</div><div class="ls-label">Hatalı Deneme</div></div>
+    <div class="log-stat"><div class="ls-num" style="color:var(--yellow)">${kilit}</div><div class="ls-label">Kilit Olayı</div></div>
+    <div class="log-stat"><div class="ls-num" style="color:var(--neon)">${cikis}</div><div class="ls-label">Çıkış</div></div>
+  `;
+
+  // Filtre
+  if(filter !== 'hepsi'){
+    const map = {başarılı:'BAŞARILI', hatalı:'HATALI', kilit:'KİLİT', çıkış:'ÇIKIŞ'};
+    logs = logs.filter(l => l.durum.includes(map[filter]||''));
+  }
+
+  const tbody = document.getElementById('log-tbody');
+  if(!tbody) return;
+  if(logs.length === 0){
+    tbody.innerHTML = `<tr><td colspan="6" class="log-empty">// Kayıt bulunamadı</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = logs.map((l,i) => {
+    const durumClass = l.durum.includes('BAŞARILI') ? 'badge-ok'
+      : l.durum.includes('ÇIKIŞ') ? 'badge-out'
+      : l.durum.includes('KİLİT') ? 'badge-lock'
+      : 'badge-fail';
+    return `<tr>
+      <td style="color:var(--muted);font-family:'Courier New',monospace">${i+1}</td>
+      <td style="white-space:nowrap;font-family:'Courier New',monospace;font-size:.78rem">${l.zaman}</td>
+      <td class="${durumClass}" style="font-weight:700;white-space:nowrap">${l.durum}</td>
+      <td style="font-family:'Courier New',monospace">${l.kullanici}</td>
+      <td style="font-family:'Courier New',monospace;white-space:nowrap;color:${l.ip==='Çevrimdışı'||l.ip==='Bilinmiyor'?'var(--muted)':'var(--neon)'}">${l.ip||'—'}</td>
+      <td style="color:var(--muted)">${l.detay}</td>
+      <td style="white-space:nowrap">${l.platform}</td>
+    </tr>`;
+  }).join('');
+}
+
+function exportLogs(){
+  const logs = getLogs();
+  if(!logs.length){ alert('Kayıt yok.'); return; }
+  const header = 'ID,Zaman,Durum,Kullanici,IP Adresi,Detay,Platform\n';
+  const rows = logs.map(l =>
+    `${l.id},"${l.zaman}","${l.durum}","${l.kullanici}","${l.ip||'—'}","${l.detay}","${l.platform}"`
+  ).join('\n');
+  download('IT-Rehberi-Loglar.csv', '﻿'+header+rows, 'text/csv');
+}
+
+function exportLogsJSON(){
+  const logs = getLogs();
+  if(!logs.length){ alert('Kayıt yok.'); return; }
+  download('IT-Rehberi-Loglar.json', JSON.stringify(logs,null,2), 'application/json');
+}
+
+function clearLogs(){
+  if(!confirm('Tüm log kayıtları silinecek. Emin misiniz?')) return;
+  localStorage.removeItem(LOG_KEY);
+  renderLogs();
+}
+
+function download(filename, content, type){
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([content],{type}));
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+// Log sayfası şifre koruması
+const LOG_PASS_HASH = 'f7e70256d8e0f38e2ef57ad6ac17722e34ddd76f8371d9c764a04c065c24a6a0';
+const LOG_SALT = 'OK_IT_2024';
+
+const _origShowPage = window.showPage;
+window.showPage = function(id){
+  if(id === 'logs'){
+    if(sessionStorage.getItem('logAuth')==='1'){
+      _origShowPage(id);
+      setTimeout(renderLogs, 50);
+    } else {
+      showLogPassModal();
+    }
+  } else {
+    _origShowPage(id);
+  }
+};
+
+function showLogPassModal(){
+  document.getElementById('log-pass-input').value = '';
+  document.getElementById('log-pass-err').classList.remove('show');
+  document.getElementById('log-pass-modal').classList.add('show');
+  setTimeout(()=> document.getElementById('log-pass-input').focus(), 200);
+}
+
+function closeLogPassModal(){
+  document.getElementById('log-pass-modal').classList.remove('show');
+}
+
+async function checkLogPass(){
+  const input = document.getElementById('log-pass-input').value;
+  const btn = document.getElementById('log-pass-btn');
+  const err = document.getElementById('log-pass-err');
+  btn.disabled = true;
+  btn.textContent = 'Doğrulanıyor…';
+  const h = await sha256(input + LOG_SALT);
+  if(h === LOG_PASS_HASH){
+    sessionStorage.setItem('logAuth','1');
+    btn.disabled = false;
+    btn.textContent = 'Doğrula';
+    closeLogPassModal();
+    _origShowPage('logs');
+    setTimeout(renderLogs, 50);
+  } else {
+    err.textContent = 'Hatalı şifre. Tekrar deneyin.';
+    err.classList.add('show');
+    document.getElementById('log-pass-input').value = '';
+    document.getElementById('log-pass-input').focus();
+    setTimeout(()=> err.classList.remove('show'), 3000);
+    btn.disabled = false;
+    btn.textContent = 'Doğrula';
+  }
+}
+
+// Oturum kontrolü
+(function checkAuth(){
+  if(sessionStorage.getItem('auth')==='1'){
+    document.getElementById('login-screen').classList.add('hidden');
+    document.getElementById('logout-btn').style.display='flex';
+  } else {
+    setTimeout(()=> document.getElementById('l-user').focus(), 300);
+  }
+})();
+
+// ── PWA service worker kaydı
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
+
+function searchContent(q){
+  if(!q){ return; }
+  q = q.toLowerCase();
+  const all = document.querySelectorAll('.module-body p, .module-body li, .module-body td');
+  let found = false;
+  all.forEach(el=>{
+    if(el.textContent.toLowerCase().includes(q) && !found){
+      found = true;
+      const mod = el.closest('.module');
+      const page = el.closest('.page');
+      if(page && mod){
+        const pageId = page.id.replace('page-','');
+        showPage(pageId);
+        mod.classList.add('open');
+        setTimeout(()=> el.scrollIntoView({behavior:'smooth',block:'center'}), 200);
+      }
+    }
+  });
+}
+</script>
+</body>
+</html>
